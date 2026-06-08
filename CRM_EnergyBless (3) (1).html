@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CRM · Energy Bless Propiedades</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green-dark:#1a3d2b;--green:#2d6a4f;--green-mid:#52b788;--green-light:#b7e4c7;--green-pale:#f0faf4;
+  --gold:#c9a84c;--gold-light:#f0d080;--gold-pale:#fdf8ec;
+  --bg:#f7f9f7;--card:#fff;--border:#e0ead4;--text:#1a2e20;--muted:#5a7a62;--danger:#c0392b;--warning:#e67e22;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+
+.login-wrap{min-height:100vh;background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 60%,var(--green-mid) 100%);display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-box{background:#fff;border-radius:20px;padding:2.5rem 2rem;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+.login-logo{text-align:center;margin-bottom:1.5rem}
+.login-logo .brand{font-family:'Playfair Display',serif;font-size:24px;color:var(--green-dark);letter-spacing:1px}
+.login-logo .sub{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-top:4px}
+.login-logo .divider-gold{width:60px;height:2px;background:linear-gradient(90deg,var(--gold-light),var(--gold));margin:10px auto}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;color:var(--text);background:#fafafa;transition:border .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green-mid);background:#fff}
+.field textarea{resize:vertical;min-height:80px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none;text-decoration:none}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-dark)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#b8952e}
+.btn-outline{background:transparent;color:var(--green);border:1.5px solid var(--green)}
+.btn-outline:hover{background:var(--green-pale)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{background:#a93226}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-full{width:100%;justify-content:center}
+.error-msg{color:var(--danger);font-size:12px;margin-top:8px;text-align:center;padding:8px;background:#fdecea;border-radius:8px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-green{background:var(--green-light);color:var(--green-dark)}
+.badge-gold{background:var(--gold-pale);color:#8a6a10;border:1px solid var(--gold-light)}
+.badge-red{background:#fdecea;color:var(--danger)}
+.badge-blue{background:#e8f0fe;color:#1a56db}
+.badge-gray{background:#f0f0f0;color:#555}
+
+.app{display:flex;min-height:100vh}
+.sidebar{width:230px;background:var(--green-dark);color:#fff;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto}
+.sidebar-brand{padding:1.4rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.1)}
+.sidebar-brand .brand{font-family:'Playfair Display',serif;font-size:18px;color:#fff;letter-spacing:1px}
+.sidebar-brand .sub{font-size:10px;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.sidebar-brand .gold-line{width:40px;height:1px;background:var(--gold);margin-top:8px}
+.sidebar-user{padding:.9rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.15)}
+.sidebar-user .avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;margin-bottom:8px}
+.sidebar-user .name{font-size:13px;font-weight:600;color:#fff}
+.sidebar-user .role{font-size:10px;color:var(--green-light);margin-top:1px}
+.sidebar-nav{flex:1;padding:.5rem 0}
+.nav-section{padding:10px 1.2rem 4px;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 1.2rem;color:rgba(255,255,255,0.65);cursor:pointer;transition:all .2s;font-size:13px;border-left:3px solid transparent}
+.nav-item:hover{background:rgba(255,255,255,0.08);color:#fff}
+.nav-item.active{background:rgba(255,255,255,0.12);color:#fff;border-left-color:var(--gold)}
+.nav-item .nav-icon{font-size:16px;width:22px;text-align:center}
+.sidebar-footer{padding:1rem 1.2rem;border-top:1px solid rgba(255,255,255,0.1)}
+.main{margin-left:230px;flex:1}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--green-dark)}
+.topbar-right{display:flex;align-items:center;gap:.8rem}
+.page-content{padding:1.5rem}
+
+.card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:1.2rem;margin-bottom:1rem}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--green-dark)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:1rem 1.2rem;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green)}
+.stat-card.gold::before{background:var(--gold)}
+.stat-num{font-size:28px;font-weight:600;color:var(--green-dark);font-family:'Playfair Display',serif;margin-top:4px}
+.stat-card.gold .stat-num{color:var(--gold)}
+.stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.stat-change{font-size:11px;color:var(--green-mid);margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--green-pale);color:var(--green-dark);font-weight:600;padding:9px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.8px}
+td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafef8}
+.action-btns{display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;background:var(--green-pale);color:var(--green-dark);border:1px solid var(--green-light);font-weight:500}
+
+.import-box{border:2px dashed var(--green-light);border-radius:12px;padding:1.5rem;text-align:center;background:var(--green-pale);margin-bottom:1rem}
+.import-box textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:.8rem;font-family:'DM Sans',sans-serif;font-size:13px;min-height:130px;margin-top:.8rem;resize:vertical;background:#fff}
+.ai-box{background:linear-gradient(135deg,var(--green-pale),var(--gold-pale));border:1.5px solid var(--green-light);border-radius:12px;padding:1.2rem;font-size:13px;line-height:1.7;white-space:pre-wrap;margin-top:.8rem}
+.ai-header{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:6px}
+
+.advisor-portal{min-height:100vh;background:var(--bg)}
+.advisor-header{background:var(--green-dark);color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.advisor-content{padding:1.5rem;max-width:720px;margin:0 auto}
+.task-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1.2rem;margin-bottom:1rem;border-left:4px solid var(--green)}
+.task-card.done{border-left-color:var(--green-mid);opacity:.8}
+.task-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem;gap:.5rem}
+.task-title{font-weight:600;color:var(--green-dark);font-size:14px}
+.task-body{font-size:13px;color:var(--muted);line-height:1.5}
+.task-form{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)}
+
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+.modal{background:#fff;border-radius:16px;padding:1.8rem;width:100%;max-width:500px;margin:auto}
+.modal-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--green-dark);margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+.modal-footer{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border)}
+
+.tabs{display:flex;gap:4px;margin-bottom:1.2rem;background:var(--green-pale);padding:4px;border-radius:10px;border:1px solid var(--green-light)}
+.tab{flex:1;padding:9px;text-align:center;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--muted);transition:all .2s}
+.tab.active{background:#fff;color:var(--green-dark);font-weight:600;box-shadow:0 1px 6px rgba(0,0,0,0.1)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.flex{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.flex-between{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.text-muted{color:var(--muted);font-size:12px}
+.text-sm{font-size:12px}
+.mt1{margin-top:.5rem}
+.mt2{margin-top:1rem}
+.fw6{font-weight:600}
+
+.search-input{padding:8px 14px;border:1.5px solid var(--border);border-radius:9px;font-family:inherit;font-size:13px;color:var(--text);background:#fafafa}
+.search-input:focus{outline:none;border-color:var(--green-mid)}
+
+.info-box{padding:1rem;border-radius:10px;font-size:13px;line-height:1.6}
+.info-green{background:var(--green-pale);border:1px solid var(--green-light);color:var(--green-dark)}
+.info-gold{background:var(--gold-pale);border:1px solid var(--gold-light);color:#7a6010}
+
+@media(max-width:768px){
+  .sidebar{width:100%;height:auto;position:relative}
+  .main{margin-left:0}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+  .app{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+const {useState,useEffect,useCallback}=React;
+
+// ═══════════════════════════════════════════════
+// USUARIOS CON ACCESO TOTAL (solo 3)
+// ═══════════════════════════════════════════════
+const ADMIN_USERS=[
+  {id:'u1',name:'Giannina Lazo',role:'Subgerente de Ventas',email:'giannina@energybless.cl',pass:'GL2026EB!',type:'admin'},
+  {id:'u2',name:'Francisco Avello',role:'Gerente de Ventas',email:'francisco@energybless.cl',pass:'FA2026EB!',type:'admin'},
+  {id:'u3',name:'Paulina Palma',role:'Gerente General',email:'paulina@energybless.cl',pass:'PP2026EB!',type:'admin'},
+];
+
+const PROJECTS_INIT=[
+  'Praderas de Caone','Terrazas de Lolol','Praderas de San Nicolás',
+  'Costa Dorada (Llico)','Valle Verde','Refugio Paredones','Chicalindo','Alto Romeros'
+];
+
+const ADVISORS_INIT=[
+  {id:'a01',name:'Alvaro Rojas',code:'AR',pass:'AR2026EB!'},
+  {id:'a02',name:'Angela Vasquez',code:'AV',pass:'AV2026EB!'},
+  {id:'a03',name:'Aracelly Aliaga',code:'AA',pass:'AA2026EB!'},
+  {id:'a04',name:'Camila Gonzalez',code:'CG',pass:'CG2026EB!'},
+  {id:'a05',name:'Catalina Acevedo',code:'CA',pass:'CA2026EB!'},
+  {id:'a06',name:'Catalina Zapata',code:'CZ',pass:'CZ2026EB!'},
+  {id:'a07',name:'Consuelo Arancibia',code:'CA2',pass:'CA2026EB!'},
+  {id:'a08',name:'Constanza Nuñez',code:'CN',pass:'CN2026EB!'},
+  {id:'a09',name:'Cristobal Perez',code:'CP',pass:'CP2026EB!'},
+  {id:'a10',name:'Cristopher Gonzalez',code:'CG2',pass:'CG2026EB!'},
+  {id:'a11',name:'David Leon',code:'DL',pass:'DL2026EB!'},
+  {id:'a12',name:'Diana Galarce',code:'DG',pass:'DG2026EB!'},
+  {id:'a13',name:'Elias Zuniga',code:'EZ',pass:'EZ2026EB!'},
+  {id:'a14',name:'Erik Saez',code:'ES',pass:'ES2026EB!'},
+  {id:'a15',name:'Fays Zerega',code:'FZ',pass:'FZ2026EB!'},
+  {id:'a16',name:'Fernanda Arriagada',code:'FA2',pass:'FA2026EB!'},
+  {id:'a17',name:'Francisco Avello',code:'FA',pass:'FA2026EB!'},
+  {id:'a18',name:'Francisca Godoy',code:'FG',pass:'FG2026EB!'},
+  {id:'a19',name:'Franco Campos',code:'FC',pass:'FC2026EB!'},
+  {id:'a20',name:'Giannina Lazo',code:'GL',pass:'GL2026EB!'},
+  {id:'a21',name:'Guillermo Tello',code:'GT',pass:'GT2026EB!'},
+  {id:'a22',name:'Javiera Caroca',code:'JC',pass:'JC2026EB!'},
+  {id:'a23',name:'Jazmin Molina',code:'JM',pass:'JM2026EB!'},
+  {id:'a24',name:'Jonathan Acosta',code:'JA',pass:'JA2026EB!'},
+  {id:'a25',name:'Lia Asman',code:'LA',pass:'LA2026EB!'},
+  {id:'a26',name:'Lorena Calderon',code:'LC',pass:'LC2026EB!'},
+  {id:'a27',name:'Magali Guinazu',code:'MG',pass:'MG2026EB!'},
+  {id:'a28',name:'Marcial Gajardo',code:'MG2',pass:'MG2026EB!'},
+  {id:'a29',name:'Maria Jesus Mieres',code:'MM',pass:'MM2026EB!'},
+  {id:'a30',name:'Maria Jose Rubio',code:'MR',pass:'MR2026EB!'},
+  {id:'a31',name:'Marilia Martinez',code:'MM2',pass:'MM2026EB!'},
+  {id:'a32',name:'Marisol Soto',code:'MS',pass:'MS2026EB!'},
+  {id:'a33',name:'Milton Cornejo',code:'MC',pass:'MC2026EB!'},
+  {id:'a34',name:'Milton Toy',code:'MT',pass:'MT2026EB!'},
+  {id:'a35',name:'Paulina Palma',code:'PP',pass:'PP2026EB!'},
+  {id:'a36',name:'Ricardo Lopez',code:'RL',pass:'RL2026EB!'},
+  {id:'a37',name:'Rodrigo Herrera',code:'RH',pass:'RH2026EB!'},
+  {id:'a38',name:'Roxana Gatica',code:'RG',pass:'RG2026EB!'},
+  {id:'a39',name:'Sergio Carvajal',code:'SC',pass:'SC2026EB!'},
+  {id:'a40',name:'Tomas Alliende',code:'TA',pass:'TA2026EB!'},
+  {id:'a41',name:'Trinidad Gallegos',code:'TG',pass:'TG2026EB!'},
+  {id:'a42',name:'Yoel Arce',code:'YA',pass:'YA2026EB!'},
+  {id:'a43',name:'Yudisan',code:'YU',pass:'YU2026EB!'},
+];
+
+const STATUS_OPTS=['Nuevo','Contactado','Seguimiento','Visita agendada','Propuesta enviada','Reservado','Descartado'];
+const STATUS_COLORS={
+  'Nuevo':'badge-blue','Contactado':'badge-green','Seguimiento':'badge-gold',
+  'Visita agendada':'badge-gold','Propuesta enviada':'badge-gold','Reservado':'badge-green','Descartado':'badge-red'
+};
+
+function gs(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}}
+function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+
+const initLeads=[
+  {id:'l1',name:'Benja Ignacio',email:'benjaaravenaa@gmail.com',phone:'+56961348631',
+   project:'Praderas de Caone',motivation:'Tener un lugar para escapar los fines de semana',
+   budget:'Entre $8 y $15 millones',status:'Nuevo',source:'Factor Digital',
+   date:'2026-06-07',advisorId:null,notes:''}
+];
+
+// ═══════════════════════════════════════════════
+// LOGIN
+// ═══════════════════════════════════════════════
+function Login({onLogin}){
+  const[email,setEmail]=useState('');
+  const[pass,setPass]=useState('');
+  const[code,setCode]=useState('');
+  const[mode,setMode]=useState('admin');
+  const[err,setErr]=useState('');
+
+  function doLogin(){
+    setErr('');
+    if(mode==='admin'){
+      const u=ADMIN_USERS.find(u=>u.email.toLowerCase()===email.toLowerCase()&&u.pass===pass);
+      if(u)onLogin(u,'admin');
+      else setErr('Correo o contraseña incorrectos');
+    }else{
+      const advisors=gs('eb_advisors',ADVISORS_INIT);
+      const u=advisors.find(a=>a.code.toUpperCase()===code.toUpperCase()&&a.pass===pass);
+      if(u)onLogin(u,'advisor');
+      else setErr('Código o contraseña incorrectos');
+    }
+  }
+
+  return(
+    <div className="login-wrap">
+      <div className="login-box">
+        <div className="login-logo">
+          <div className="brand">Energy Bless</div>
+          <div className="divider-gold"></div>
+          <div className="sub">Propiedades · CRM División Parcelas</div>
+        </div>
+        <div className="tabs">
+          <div className={`tab ${mode==='admin'?'active':''}`} onClick={()=>{setMode('admin');setErr('')}}>Acceso Administrativo</div>
+          <div className={`tab ${mode==='advisor'?'active':''}`} onClick={()=>{setMode('advisor');setErr('')}}>Portal Asesor</div>
+        </div>
+        {mode==='admin'?(
+          <>
+            <div className="field"><label>Correo electrónico</label>
+              <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="usuario@energybless.cl" onKeyDown={e=>e.key==='Enter'&&doLogin()}/>
+            </div>
+            <div className="field"><label>Contraseña</label>
+              <input type="password" value={pass} onChange={e=>setPass(e.target.value)} onKeyDown={e=>e.key==='Enter'&&doLogin()}/>
+            </div>
+          </>
+        ):(
+          <>
+            <div className="field"><label>Código de asesor</label>
+              <input value={code} onChange={e=>setCode(e.target.value)} placeholder="Ej: FC, AR, CP..." onKeyDown={e=>e.key==='Enter'&&doLogin()}/>
+            </div>
+            <div className="field"><label>Contraseña</label>
+              <input type="password" value={pass} onChange={e=>setPass(e.target.value)} onKeyDown={e=>e.key==='Enter'&&doLogin()}/>
+            </div>
+            <div className="info-box info-green mt1" style={{fontSize:'12px'}}>
+              El portal asesor solo permite ver y reportar tus tareas asignadas. No tiene acceso a leads ni información del CRM.
+            </div>
+          </>
+        )}
+        {err&&<div className="error-msg">{err}</div>}
+        <button className="btn btn-primary btn-full mt2" style={{padding:'12px'}} onClick={doLogin}>Ingresar al sistema</button>
+        
+        <div style={{marginTop:'1.2rem',borderTop:'1px solid var(--border)',paddingTop:'1rem'}}>
+          
+          
+          
+          
+          
+          
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════
+// PORTAL ASESOR (acceso restringido)
+// ═══════════════════════════════════════════════
+function AdvisorPortal({user,onLogout}){
+  const[tasks,setTasks]=useState(()=>gs('eb_tasks',[]));
+  const[tab,setTab]=useState('pending');
+  const myTasks=tasks.filter(t=>t.advisorId===user.id);
+  const pending=myTasks.filter(t=>t.status!=='Completada');
+  const done=myTasks.filter(t=>t.status==='Completada');
+
+  const[showChangePwd,setShowChangePwd]=useState(false);
+  const[oldPwd,setOldPwd]=useState('');
+  const[newPwd,setNewPwd]=useState('');
+  const[newPwd2,setNewPwd2]=useState('');
+  const[pwdMsg,setPwdMsg]=useState('');
+
+  function changePassword(){
+    if(oldPwd!==user.pass){setPwdMsg('❌ Contraseña actual incorrecta');return;}
+    if(newPwd.length<6){setPwdMsg('❌ La nueva contraseña debe tener al menos 6 caracteres');return;}
+    if(newPwd!==newPwd2){setPwdMsg('❌ Las contraseñas no coinciden');return;}
+    const advisors=gs('eb_advisors',[]);
+    const updated=advisors.map(a=>a.id===user.id?{...a,pass:newPwd}:a);
+    ss('eb_advisors',updated);
+    user.pass=newPwd;
+    setPwdMsg('✅ Contraseña cambiada exitosamente');
+    setOldPwd('');setNewPwd('');setNewPwd2('');
+    setTimeout(()=>{setShowChangePwd(false);setPwdMsg('');},2000);
+  }
+
+  function submitReport(taskId,report,nextContact){
+    const updated=tasks.map(t=>t.id===taskId?{...t,status:'Completada',report,nextContact,reportDate:new Date().toLocaleDateString('es-CL')}:t);
+    setTasks(updated);ss('eb_tasks',updated);
+  }
+
+  return(
+    <div className="advisor-portal">
+      <div className="advisor-header">
+        <div>
+          <div style={{fontFamily:'Playfair Display,serif',fontSize:'17px',letterSpacing:'1px'}}>Energy Bless · Portal Asesor</div>
+          <div style={{fontSize:'12px',color:'var(--green-light)',marginTop:'2px'}}>{user.name} — Código: {user.code}</div>
+        </div>
+        <div style={{display:'flex',gap:'8px'}}>
+          <button className="btn btn-sm" style={{background:'rgba(255,255,255,0.15)',color:'#fff',border:'1px solid rgba(255,255,255,0.3)'}} onClick={()=>setShowChangePwd(v=>!v)}>🔐 Mi clave</button>
+          <button className="btn btn-sm" style={{background:'rgba(255,255,255,0.15)',color:'#fff',border:'1px solid rgba(255,255,255,0.3)'}} onClick={onLogout}>Cerrar sesión</button>
+        </div>
+      </div>
+      <div className="advisor-content">
+        <div className="stats-grid" style={{gridTemplateColumns:'1fr 1fr',marginBottom:'1rem'}}>
+          <div className="stat-card"><div className="stat-label">Tareas pendientes</div><div className="stat-num">{pending.length}</div></div>
+          <div className="stat-card gold"><div className="stat-label">Completadas</div><div className="stat-num" style={{color:'var(--gold)'}}>{done.length}</div></div>
+        </div>
+        <div className="tabs">
+          <div className={`tab ${tab==='pending'?'active':''}`} onClick={()=>setTab('pending')}>Pendientes ({pending.length})</div>
+          <div className={`tab ${tab==='done'?'active':''}`} onClick={()=>setTab('done')}>Completadas ({done.length})</div>
+        </div>
+        {tab==='pending'&&(
+          pending.length===0
+            ?<div className="card" style={{textAlign:'center',color:'var(--muted)',padding:'2rem'}}>✅ No tienes tareas pendientes</div>
+            :pending.map(t=><AdvisorTaskCard key={t.id} task={t} onSubmit={submitReport}/>)
+        )}
+        {tab==='done'&&(
+          done.length===0
+            ?<div className="card" style={{textAlign:'center',color:'var(--muted)',padding:'2rem'}}>Sin tareas completadas aún</div>
+            :done.map(t=>(
+              <div key={t.id} className="task-card done">
+                <div className="task-header"><span className="task-title">{t.title}</span><span className="badge badge-green">✓ Completada</span></div>
+                <div className="task-body" style={{marginBottom:'.5rem'}}>{t.description}</div>
+                {t.project&&<div className="text-muted">📍 {t.project}</div>}
+                <div style={{marginTop:'.8rem',padding:'.8rem',background:'var(--green-pale)',borderRadius:'8px',fontSize:'13px'}}>
+                  <div className="fw6" style={{color:'var(--green-dark)',marginBottom:'4px'}}>Tu reporte:</div>
+                  <div>{t.report}</div>
+                  {t.nextContact&&<div className="mt1"><span className="fw6">Próximo contacto:</span> {t.nextContact}</div>}
+                  <div className="text-muted mt1">Reportado el {t.reportDate}</div>
+                </div>
+              </div>
+            ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+function AdvisorTaskCard({task,onSubmit}){
+  const[open,setOpen]=useState(false);
+  const[report,setReport]=useState('');
+  const[next,setNext]=useState('');
+  const[err,setErr]=useState('');
+
+  function submit(){
+    if(!report.trim()){setErr('Debes describir el resultado');return;}
+    onSubmit(task.id,report,next);setOpen(false);
+  }
+
+  return(
+    <div className="task-card">
+      <div className="task-header">
+        <span className="task-title">{task.title}</span>
+        <span className={`badge ${STATUS_COLORS[task.status]||'badge-gray'}`}>{task.status||'Pendiente'}</span>
+      </div>
+      <div className="task-body">{task.description}</div>
+      <div className="flex mt1">
+        {task.project&&<span className="tag">📍 {task.project}</span>}
+        {task.dueDate&&<span className="text-muted">📅 Vence: {task.dueDate}</span>}
+      </div>
+      {!open&&<button className="btn btn-primary btn-sm mt2" onClick={()=>setOpen(true)}>📝 Reportar resultado</button>}
+      {open&&(
+        <div className="task-form">
+          <div className="field">
+            <label>¿Qué realizaste? Describe el resultado *</label>
+            <textarea value={report} onChange={e=>setReport(e.target.value)} placeholder="Ej: Llamé al cliente el lunes, mostró interés en la parcela, le envié ficha técnica de Caone. Quedamos en hablar el miércoles para agendar visita."/>
+          </div>
+          <div className="field">
+            <label>Próximo contacto / acción programada</label>
+            <input value={next} onChange={e=>setNext(e.target.value)} placeholder="Ej: Miércoles 11 jun — llamar para agendar visita presencial"/>
+          </div>
+          {err&&<div className="error-msg" style={{marginBottom:'.5rem'}}>{err}</div>}
+          <div className="flex">
+            <button className="btn btn-primary btn-sm" onClick={submit}>✅ Enviar reporte</button>
+            <button className="btn btn-outline btn-sm" onClick={()=>{setOpen(false);setErr('')}}>Cancelar</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════
+// APP PRINCIPAL (admins)
+// ═══════════════════════════════════════════════
+function AdminApp({user,onLogout}){
+  const[page,setPage]=useState('dashboard');
+  const[leads,setLeads]=useState(()=>gs('eb_leads',initLeads));
+  const[tasks,setTasks]=useState(()=>gs('eb_tasks',[]));
+  const[projects,setProjects]=useState(()=>gs('eb_projects',PROJECTS_INIT));
+  const[advisors,setAdvisors]=useState(()=>gs('eb_advisors',ADVISORS_INIT));
+
+  const saveL=l=>{setLeads(l);ss('eb_leads',l)};
+  const saveT=t=>{setTasks(t);ss('eb_tasks',t)};
+  const saveP=p=>{setProjects(p);ss('eb_projects',p)};
+  const saveA=a=>{setAdvisors(a);ss('eb_advisors',a)};
+
+  const initials=user.name.split(' ').map(n=>n[0]).slice(0,2).join('');
+
+  const NAV=[
+    {section:'Principal'},
+    {id:'dashboard',icon:'📊',label:'Dashboard'},
+    {id:'leads',icon:'👥',label:'Leads'},
+    {id:'import',icon:'📧',label:'Importar desde Correo'},
+    {section:'Gestión'},
+    {id:'tasks',icon:'✅',label:'Tareas Asesores'},
+    {id:'projects',icon:'🏡',label:'Proyectos'},
+    {id:'advisors',icon:'🧑‍💼',label:'Equipo Asesores'},
+    {section:'Herramientas'},
+    {id:'ai',icon:'🤖',label:'Análisis con IA'},
+    {id:'guide',icon:'📖',label:'Guía de Uso'},
+  ];
+
+  const pageTitle={dashboard:'Dashboard',leads:'Gestión de Leads',import:'Importar Leads desde Correo',tasks:'Tareas de Asesores',projects:'Proyectos',advisors:'Equipo de Asesores',ai:'Análisis con Inteligencia Artificial',guide:'Guía de Uso del CRM'};
+  const nuevosCount=leads.filter(l=>l.status==='Nuevo').length;
+
+  return(
+    <div className="app">
+      <div className="sidebar">
+        <div className="sidebar-brand">
+          <div className="brand">Energy Bless</div>
+          <div className="gold-line"></div>
+          <div className="sub">División Parcelas</div>
+        </div>
+        <div className="sidebar-user">
+          <div className="avatar">{initials}</div>
+          <div className="name">{user.name}</div>
+          <div className="role">{user.role}</div>
+        </div>
+        <div className="sidebar-nav">
+          {NAV.map((n,i)=>n.section
+            ?<div key={i} className="nav-section">{n.section}</div>
+            :<div key={n.id} className={`nav-item ${page===n.id?'active':''}`} onClick={()=>setPage(n.id)}>
+              <span className="nav-icon">{n.icon}</span>{n.label}
+              {n.id==='leads'&&nuevosCount>0&&<span className="badge badge-gold" style={{marginLeft:'auto',fontSize:'10px',padding:'2px 7px'}}>{nuevosCount}</span>}
+            </div>
+          )}
+        </div>
+        <div className="sidebar-footer">
+          <button className="btn btn-sm btn-full" style={{background:'rgba(255,255,255,0.1)',color:'rgba(255,255,255,0.7)',border:'1px solid rgba(255,255,255,0.15)'}} onClick={onLogout}>Cerrar sesión</button>
+        </div>
+      </div>
+      <div className="main">
+        <div className="topbar">
+          <div className="topbar-title">{pageTitle[page]}</div>
+          <div className="topbar-right">
+            {nuevosCount>0&&<span className="badge badge-gold">{nuevosCount} leads nuevos</span>}
+            <span className="text-muted" style={{fontSize:'12px'}}>{new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long'})}</span>
+          </div>
+        </div>
+        <div className="page-content">
+          {page==='dashboard'&&<Dashboard leads={leads} tasks={tasks} advisors={advisors} projects={projects} setPage={setPage}/>}
+          {page==='leads'&&<LeadsPage leads={leads} setLeads={saveL} projects={projects} advisors={advisors}/>}
+          {page==='import'&&<ImportPage leads={leads} setLeads={saveL} projects={projects}/>}
+          {page==='tasks'&&<TasksPage tasks={tasks} setTasks={saveT} advisors={advisors} projects={projects}/>}
+          {page==='projects'&&<ProjectsPage projects={projects} setProjects={saveP}/>}
+          {page==='advisors'&&<AdvisorsPage advisors={advisors} setAdvisors={saveA} tasks={tasks}/>}
+          {page==='ai'&&<AIPage leads={leads} tasks={tasks} advisors={advisors} projects={projects}/>}
+          {page==='guide'&&<GuidePage/>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── DASHBOARD ──────────────────────────────────
+function Dashboard({leads,tasks,advisors,projects,setPage}){
+  const nuevos=leads.filter(l=>l.status==='Nuevo').length;
+  const contactados=leads.filter(l=>l.status==='Contactado').length;
+  const reservados=leads.filter(l=>l.status==='Reservado').length;
+  const pendTasks=tasks.filter(t=>t.status!=='Completada').length;
+  const byProject={};
+  leads.forEach(l=>{byProject[l.project]=(byProject[l.project]||0)+1});
+  const recentLeads=leads.slice(-6).reverse();
+  const pendingTasks=tasks.filter(t=>t.status!=='Completada').slice(0,5);
+
+  return(
+    <div>
+      <div className="stats-grid">
+        <div className="stat-card"><div className="stat-label">Total Leads</div><div className="stat-num">{leads.length}</div></div>
+        <div className="stat-card gold"><div className="stat-label">Leads Nuevos</div><div className="stat-num" style={{color:'var(--gold)'}}>{nuevos}</div></div>
+        <div className="stat-card"><div className="stat-label">Reservados</div><div className="stat-num">{reservados}</div></div>
+        <div className="stat-card"><div className="stat-label">Tareas Pendientes</div><div className="stat-num">{pendTasks}</div></div>
+      </div>
+      <div className="grid2">
+        <div className="card">
+          <div className="card-header">
+            <div className="card-title">Leads Recientes</div>
+            <button className="btn btn-outline btn-sm" onClick={()=>setPage('leads')}>Ver todos</button>
+          </div>
+          {recentLeads.length===0?<div className="text-muted">Sin leads aún</div>:recentLeads.map(l=>(
+            <div key={l.id} style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',padding:'9px 0',borderBottom:'1px solid var(--border)'}}>
+              <div>
+                <div className="fw6" style={{fontSize:'13px'}}>{l.name}</div>
+                <div className="text-muted">{l.project} · {l.date}</div>
+              </div>
+              <span className={`badge ${STATUS_COLORS[l.status]||'badge-gray'}`}>{l.status}</span>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div className="card">
+            <div className="card-header">
+              <div className="card-title">Rendimiento Asesores</div>
+              <button className="btn btn-outline btn-sm" onClick={()=>setPage('tasks')}>Ver tareas</button>
+            </div>
+            {advisors.map(a=>{
+              const myT=tasks.filter(t=>t.advisorId===a.id);
+              const pend=myT.filter(t=>t.status!=='Completada').length;
+              const done=myT.filter(t=>t.status==='Completada').length;
+              const total=myT.length;
+              const pct=total>0?Math.round(done/total*100):0;
+              return(
+                <div key={a.id} style={{padding:'8px 0',borderBottom:'1px solid var(--border)'}}>
+                  <div style={{display:'flex',justifyContent:'space-between',marginBottom:'4px'}}>
+                    <span className="fw6" style={{fontSize:'13px'}}>{a.name}</span>
+                    <span className="text-muted">{pct}% completado</span>
+                  </div>
+                  <div style={{background:'var(--border)',borderRadius:'4px',height:'5px'}}>
+                    <div style={{background:'var(--green)',height:'5px',borderRadius:'4px',width:pct+'%',transition:'width .3s'}}></div>
+                  </div>
+                  <div className="flex mt1">
+                    <span className="badge badge-gold" style={{fontSize:'10px'}}>{pend} pend.</span>
+                    <span className="badge badge-green" style={{fontSize:'10px'}}>{done} ok</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="card">
+            <div className="card-title" style={{marginBottom:'1rem'}}>Leads por Proyecto</div>
+            {Object.entries(byProject).sort((a,b)=>b[1]-a[1]).map(([p,c])=>(
+              <div key={p} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'7px 0',borderBottom:'1px solid var(--border)'}}>
+                <span className="text-sm">{p}</span>
+                <span className="badge badge-green">{c}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── LEADS ──────────────────────────────────────
+function LeadsPage({leads,setLeads,projects,advisors}){
+  const[search,setSearch]=useState('');
+  const[filterProj,setFilterProj]=useState('');
+  const[filterStatus,setFilterStatus]=useState('');
+  const[filterAdv,setFilterAdv]=useState('');
+  const[selected,setSelected]=useState(null);
+  const[showAdd,setShowAdd]=useState(false);
+
+  const filtered=leads.filter(l=>{
+    const s=search.toLowerCase();
+    const ms=!s||l.name.toLowerCase().includes(s)||l.email.toLowerCase().includes(s)||l.phone.includes(s);
+    const mp=!filterProj||l.project===filterProj;
+    const mst=!filterStatus||l.status===filterStatus;
+    const ma=!filterAdv||l.advisorId===filterAdv;
+    return ms&&mp&&mst&&ma;
+  });
+
+  function deleteLead(id){if(window.confirm('¿Eliminar este lead del CRM?'))setLeads(leads.filter(l=>l.id!==id));}
+  function updateLead(upd){setLeads(leads.map(l=>l.id===upd.id?upd:l));setSelected(upd);}
+  function addLead(nl){setLeads([...leads,{...nl,id:'l'+Date.now(),date:new Date().toISOString().split('T')[0],status:'Nuevo',source:'Manual',advisorId:null,notes:''}]);setShowAdd(false);}
+
+  return(
+    <div>
+      <div className="card">
+        <div className="card-header">
+          <div className="flex">
+            <input className="search-input" style={{width:'190px'}} placeholder="🔍 Buscar..." value={search} onChange={e=>setSearch(e.target.value)}/>
+            <select className="search-input" value={filterProj} onChange={e=>setFilterProj(e.target.value)}>
+              <option value="">Todos los proyectos</option>
+              {projects.map(p=><option key={p} value={p}>{p}</option>)}
+            </select>
+            <select className="search-input" value={filterStatus} onChange={e=>setFilterStatus(e.target.value)}>
+              <option value="">Todos los estados</option>
+              {STATUS_OPTS.map(s=><option key={s} value={s}>{s}</option>)}
+            </select>
+            <select className="search-input" value={filterAdv} onChange={e=>setFilterAdv(e.target.value)}>
+              <option value="">Todos los asesores</option>
+              {advisors.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}
+            </select>
+          </div>
+          <button className="btn btn-primary btn-sm" onClick={()=>setShowAdd(true)}>+ Agregar lead</button>
+        </div>
+        <div style={{overflowX:'auto'}}>
+          {editId&&(
+          <div style={{padding:'1rem',background:'#fff3cd',borderRadius:'10px',marginBottom:'1rem',border:'1px solid #c8a227'}}>
+            <div className="fw6" style={{marginBottom:'.8rem',color:'var(--green-dark)'}}>🔐 Cambiar contraseña — {advisors.find(a=>a.id===editId)?.name}</div>
+            <div style={{display:'flex',gap:'10px',alignItems:'center'}}>
+              <input style={{flex:1}} type="password" placeholder="Nueva contraseña (mín. 6 caracteres)" value={editPassVal} onChange={e=>setEditPassVal(e.target.value)}/>
+              <button className="btn btn-primary btn-sm" onClick={savePass}>Guardar</button>
+              <button className="btn btn-outline btn-sm" onClick={()=>setEditId(null)}>Cancelar</button>
+            </div>
+          </div>
+        )}
+        <table>
+            <thead>
+              <tr><th>Nombre</th><th>Contacto</th><th>Proyecto</th><th>Presupuesto</th><th>Estado</th><th>Asesor</th><th>Fecha</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              {filtered.map(l=>{
+                const adv=advisors.find(a=>a.id===l.advisorId);
+                return(
+                  <tr key={l.id}>
+                    <td><div className="fw6">{l.name}</div><div className="text-muted">{l.source}</div></td>
+                    <td><div style={{fontSize:'12px'}}>{l.email}</div><div className="text-muted">{l.phone}</div></td>
+                    <td><span className="tag">{l.project}</span></td>
+                    <td className="text-sm">{l.budget||'—'}</td>
+                    <td><span className={`badge ${STATUS_COLORS[l.status]||'badge-gray'}`}>{l.status}</span></td>
+                    <td className="text-sm">{adv?adv.name:<span style={{color:'#bbb'}}>Sin asignar</span>}</td>
+                    <td className="text-muted">{l.date}</td>
+                    <td>
+                      <div className="action-btns">
+                        <button className="btn btn-outline btn-sm" onClick={()=>setSelected(l)}>Ver / Editar</button>
+                        <button className="btn btn-danger btn-sm" onClick={()=>deleteLead(l.id)}>✕</button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+              {filtered.length===0&&<tr><td colSpan="8" style={{textAlign:'center',color:'var(--muted)',padding:'2rem'}}>No se encontraron leads con estos filtros</td></tr>}
+            </tbody>
+          </table>
+        </div>
+        <div className="text-muted mt1">Mostrando {filtered.length} de {leads.length} leads</div>
+      </div>
+      {selected&&<LeadModal lead={selected} advisors={advisors} projects={projects} onUpdate={updateLead} onClose={()=>setSelected(null)}/>}
+      {showAdd&&<AddLeadModal advisors={advisors} projects={projects} onAdd={addLead} onClose={()=>setShowAdd(false)}/>}
+    </div>
+  );
+}
+
+function LeadModal({lead,advisors,projects,onUpdate,onClose}){
+  const[d,setD]=useState({...lead});
+  return(
+    <div className="modal-bg" onClick={e=>e.target===e.currentTarget&&onClose()}>
+      <div className="modal">
+        <div className="modal-title">📋 {d.name}</div>
+        <div className="grid2">
+          <div className="field"><label>Nombre</label><input value={d.name} onChange={e=>setD({...d,name:e.target.value})}/></div>
+          <div className="field"><label>Teléfono</label><input value={d.phone} onChange={e=>setD({...d,phone:e.target.value})}/></div>
+          <div className="field"><label>Email</label><input value={d.email} onChange={e=>setD({...d,email:e.target.value})}/></div>
+          <div className="field"><label>Presupuesto</label><input value={d.budget||''} onChange={e=>setD({...d,budget:e.target.value})}/></div>
+        </div>
+        <div className="field"><label>Motivación / interés</label><input value={d.motivation||''} onChange={e=>setD({...d,motivation:e.target.value})}/></div>
+        <div className="grid2">
+          <div className="field"><label>Proyecto</label>
+            <select value={d.project} onChange={e=>setD({...d,project:e.target.value})}>
+              {projects.map(p=><option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+          <div className="field"><label>Estado</label>
+            <select value={d.status} onChange={e=>setD({...d,status:e.target.value})}>
+              {STATUS_OPTS.map(s=><option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+        </div>
+        <div className="field"><label>Asesor asignado</label>
+          <select value={d.advisorId||''} onChange={e=>setD({...d,advisorId:e.target.value||null})}>
+            <option value="">Sin asignar</option>
+            {advisors.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}
+          </select>
+        </div>
+        <div className="field"><label>Fuente</label>
+          <input value={d.source||''} onChange={e=>setD({...d,source:e.target.value})}/>
+        </div>
+        <div className="field"><label>Notas internas</label>
+          <textarea value={d.notes||''} onChange={e=>setD({...d,notes:e.target.value})} placeholder="Observaciones, seguimientos, acuerdos, detalles relevantes..."/>
+        </div>
+        <div className="modal-footer">
+          <button className="btn btn-outline btn-sm" onClick={onClose}>Cancelar</button>
+          <button className="btn btn-primary btn-sm" onClick={()=>onUpdate(d)}>Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AddLeadModal({advisors,projects,onAdd,onClose}){
+  const[d,setD]=useState({name:'',email:'',phone:'',budget:'',motivation:'',project:projects[0]||''});
+  return(
+    <div className="modal-bg" onClick={e=>e.target===e.currentTarget&&onClose()}>
+      <div className="modal">
+        <div className="modal-title">➕ Agregar Lead Manual</div>
+        <div className="grid2">
+          <div className="field"><label>Nombre *</label><input value={d.name} onChange={e=>setD({...d,name:e.target.value})}/></div>
+          <div className="field"><label>Teléfono</label><input value={d.phone} onChange={e=>setD({...d,phone:e.target.value})}/></div>
+          <div className="field"><label>Email</label><input value={d.email} onChange={e=>setD({...d,email:e.target.value})}/></div>
+          <div className="field"><label>Presupuesto</label><input value={d.budget} onChange={e=>setD({...d,budget:e.target.value})}/></div>
+        </div>
+        <div className="field"><label>Motivación</label><input value={d.motivation} onChange={e=>setD({...d,motivation:e.target.value})}/></div>
+        <div className="field"><label>Proyecto</label>
+          <select value={d.project} onChange={e=>setD({...d,project:e.target.value})}>
+            {projects.map(p=><option key={p} value={p}>{p}</option>)}
+          </select>
+        </div>
+        <div className="modal-footer">
+          <button className="btn btn-outline btn-sm" onClick={onClose}>Cancelar</button>
+          <button className="btn btn-primary btn-sm" onClick={()=>{if(d.name.trim())onAdd(d)}}>Agregar lead</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── IMPORT PAGE ─────────────────────────────────
+function ImportPage({leads,setLeads,projects}){
+  const[text,setText]=useState('');
+  const[loading,setLoading]=useState(false);
+  const[parsed,setParsed]=useState(null);
+  const[editParsed,setEditParsed]=useState(null);
+  const[added,setAdded]=useState(false);
+  const[err,setErr]=useState('');
+
+  async function parseWithAI(){
+    if(!text.trim()){setErr('Pega el texto del correo primero');return;}
+    setLoading(true);setErr('');setParsed(null);setAdded(false);setEditParsed(null);
+    try{
+      const res=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:800,
+          messages:[{role:'user',content:`Extrae los datos de este correo de notificación de lead inmobiliario de Factor Digital y responde SOLO con JSON válido, sin backticks ni texto adicional:
+{"name":"nombre completo","email":"correo electrónico","phone":"número con código país","motivation":"motivo de compra en español natural sin guiones bajos","budget":"rango de presupuesto limpio en pesos","project":"nombre del proyecto si aparece"}
+
+Correo:
+${text}`}]
+        })
+      });
+      const data=await res.json();
+      const raw=data.content?.map(i=>i.text||'').join('');
+      const obj=JSON.parse(raw.replace(/```json|```/g,'').trim());
+      setParsed(obj);setEditParsed({...obj});
+    }catch(e){setErr('Error al procesar. Verifica que pegaste el texto completo del correo.');}
+    setLoading(false);
+  }
+
+  function addLead(){
+    if(!editParsed)return;
+    const projMatch=projects.find(p=>p.toLowerCase().includes((editParsed.project||'').toLowerCase().substring(0,5)));
+    const nl={...editParsed,id:'l'+Date.now(),project:projMatch||projects[0]||'',status:'Nuevo',source:'Factor Digital',date:new Date().toISOString().split('T')[0],advisorId:null,notes:''};
+    setLeads([...leads,nl]);setAdded(true);
+  }
+
+  return(
+    <div>
+      <div className="card">
+        <div className="card-title" style={{marginBottom:'.5rem'}}>📧 Importar Lead desde Correo de Factor Digital</div>
+        <p className="text-muted" style={{marginBottom:'1rem',lineHeight:'1.6'}}>
+          Cuando jorge.verdugo envíe un correo de notificación a Francisco Avello, copia el texto completo del correo y pégalo aquí. La IA extraerá automáticamente todos los datos del prospecto.
+        </p>
+        <div className="import-box">
+          <div style={{fontSize:'13px',color:'var(--muted)',fontWeight:'500'}}>📋 Pega aquí el texto completo del correo</div>
+          <textarea value={text} onChange={e=>setText(e.target.value)} placeholder={`Ejemplo de texto a pegar:\n\nHola Fran, llegó un nuevo Lead para [Factor Digital] Leads Praderas de Caone Audiencia Amplia - Dinámico - Praderas de Caone - Crédito Dinámico - Praderas de Caone - Crédito\nTe dejo los datos para contactarlo:\nBenja Ignacio\nbenjaaravenaa@gmail.com\n+56961348631\ntener_un_lugar_para_escapar_los_fines_de_semana\nentre_$8_y_$15_millones\nen_las_próximas_2_semanas`}/>
+        </div>
+        {err&&<div className="error-msg" style={{marginBottom:'.8rem'}}>{err}</div>}
+        <button className="btn btn-gold" onClick={parseWithAI} disabled={loading} style={{padding:'11px 20px'}}>
+          {loading?'🔄 Procesando con IA...':'🤖 Extraer datos automáticamente con IA'}
+        </button>
+      </div>
+
+      {editParsed&&(
+        <div className="card">
+          <div className="card-title" style={{marginBottom:'1rem'}}>✅ Datos extraídos — revisa y edita si es necesario</div>
+          <div className="grid2">
+            <div className="field"><label>Nombre</label><input value={editParsed.name||''} onChange={e=>setEditParsed({...editParsed,name:e.target.value})}/></div>
+            <div className="field"><label>Teléfono</label><input value={editParsed.phone||''} onChange={e=>setEditParsed({...editParsed,phone:e.target.value})}/></div>
+            <div className="field"><label>Email</label><input value={editParsed.email||''} onChange={e=>setEditParsed({...editParsed,email:e.target.value})}/></div>
+            <div className="field"><label>Presupuesto</label><input value={editParsed.budget||''} onChange={e=>setEditParsed({...editParsed,budget:e.target.value})}/></div>
+          </div>
+          <div className="field"><label>Motivación / interés</label><input value={editParsed.motivation||''} onChange={e=>setEditParsed({...editParsed,motivation:e.target.value})}/></div>
+          <div className="field"><label>Proyecto detectado</label><input value={editParsed.project||''} onChange={e=>setEditParsed({...editParsed,project:e.target.value})}/></div>
+          {!added
+            ?<button className="btn btn-primary mt1" onClick={addLead}>➕ Confirmar y agregar al CRM</button>
+            :<div className="info-box info-green mt1">✅ <strong>{editParsed.name}</strong> fue agregado exitosamente al CRM como lead Nuevo.</div>
+          }
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── TASKS PAGE ──────────────────────────────────
+function TasksPage({tasks,setTasks,advisors,projects}){
+  const[showAdd,setShowAdd]=useState(false);
+  const[filterAdv,setFilterAdv]=useState('');
+  const[filterStatus,setFilterStatus]=useState('');
+
+  const filtered=tasks.filter(t=>{
+    const ma=!filterAdv||t.advisorId===filterAdv;
+    const ms=!filterStatus||(filterStatus==='Completada'?t.status==='Completada':t.status!=='Completada');
+    return ma&&ms;
+  });
+
+  function deleteTask(id){if(window.confirm('¿Eliminar esta tarea?'))setTasks(tasks.filter(t=>t.id!==id));}
+  function addTask(nt){setTasks([...tasks,{...nt,id:'t'+Date.now(),status:'Pendiente',date:new Date().toISOString().split('T')[0]}]);setShowAdd(false);}
+
+  return(
+    <div>
+      <div className="card">
+        <div className="card-header">
+          <div className="flex">
+            <select className="search-input" value={filterAdv} onChange={e=>setFilterAdv(e.target.value)}>
+              <option value="">Todos los asesores</option>
+              {advisors.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}
+            </select>
+            <select className="search-input" value={filterStatus} onChange={e=>setFilterStatus(e.target.value)}>
+              <option value="">Todos los estados</option>
+              <option value="Pendiente">Solo pendientes</option>
+              <option value="Completada">Solo completadas</option>
+            </select>
+          </div>
+          <button className="btn btn-primary btn-sm" onClick={()=>setShowAdd(true)}>+ Asignar nueva tarea</button>
+        </div>
+        <div style={{overflowX:'auto'}}>
+          <table>
+            <thead><tr><th>Tarea</th><th>Asesor</th><th>Proyecto</th><th>Vence</th><th>Estado</th><th>Reporte del asesor</th><th></th></tr></thead>
+            <tbody>
+              {filtered.map(t=>{
+                const adv=advisors.find(a=>a.id===t.advisorId);
+                return(
+                  <tr key={t.id}>
+                    <td><div className="fw6">{t.title}</div><div className="text-muted">{(t.description||'').substring(0,55)}{t.description?.length>55?'...':''}</div></td>
+                    <td><span className="fw6">{adv?.name||'—'}</span></td>
+                    <td><span className="tag">{t.project}</span></td>
+                    <td className="text-muted">{t.dueDate||'—'}</td>
+                    <td><span className={`badge ${t.status==='Completada'?'badge-green':'badge-gold'}`}>{t.status||'Pendiente'}</span></td>
+                    <td style={{maxWidth:'220px'}}>
+                      {t.report
+                        ?<div><div className="text-sm">{t.report.substring(0,80)}{t.report.length>80?'...':''}</div>{t.nextContact&&<div className="text-muted mt1">📅 {t.nextContact}</div>}</div>
+                        :<span style={{color:'#bbb',fontSize:'12px'}}>Esperando reporte...</span>
+                      }
+                    </td>
+                    <td><button className="btn btn-danger btn-sm" onClick={()=>deleteTask(t.id)}>✕</button></td>
+                  </tr>
+                );
+              })}
+              {filtered.length===0&&<tr><td colSpan="7" style={{textAlign:'center',color:'var(--muted)',padding:'2rem'}}>No hay tareas con estos filtros</td></tr>}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {showAdd&&<AddTaskModal advisors={advisors} projects={projects} onAdd={addTask} onClose={()=>setShowAdd(false)}/>}
+    </div>
+  );
+}
+
+function AddTaskModal({advisors,projects,onAdd,onClose}){
+  const[d,setD]=useState({title:'',description:'',advisorId:'',project:projects[0]||'',dueDate:''});
+  const[err,setErr]=useState('');
+  function submit(){
+    if(!d.title.trim()){setErr('El título es obligatorio');return;}
+    if(!d.advisorId){setErr('Debes seleccionar un asesor');return;}
+    onAdd(d);
+  }
+  return(
+    <div className="modal-bg" onClick={e=>e.target===e.currentTarget&&onClose()}>
+      <div className="modal">
+        <div className="modal-title">✅ Asignar Tarea a Asesor</div>
+        <div className="field"><label>Título de la tarea *</label>
+          <input value={d.title} onChange={e=>setD({...d,title:e.target.value})} placeholder="Ej: Llamar a cliente y agendar visita a terreno"/>
+        </div>
+        <div className="field"><label>Instrucciones detalladas</label>
+          <textarea value={d.description} onChange={e=>setD({...d,description:e.target.value})} placeholder="Describe exactamente qué debe hacer el asesor: a quién llamar, qué decir, qué lograr..."/>
+        </div>
+        <div className="grid2">
+          <div className="field"><label>Asesor asignado *</label>
+            <select value={d.advisorId} onChange={e=>setD({...d,advisorId:e.target.value})}>
+              <option value="">Seleccionar asesor...</option>
+              {advisors.map(a=><option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
+            </select>
+          </div>
+          <div className="field"><label>Proyecto</label>
+            <select value={d.project} onChange={e=>setD({...d,project:e.target.value})}>
+              {projects.map(p=><option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+        </div>
+        <div className="field"><label>Fecha límite</label>
+          <input type="date" value={d.dueDate} onChange={e=>setD({...d,dueDate:e.target.value})}/>
+        </div>
+        {err&&<div className="error-msg">{err}</div>}
+        <div className="modal-footer">
+          <button className="btn btn-outline btn-sm" onClick={onClose}>Cancelar</button>
+          <button className="btn btn-primary btn-sm" onClick={submit}>Asignar tarea</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── PROJECTS ────────────────────────────────────
+function ProjectsPage({projects,setProjects}){
+  const[newP,setNewP]=useState('');
+  const[err,setErr]=useState('');
+  function add(){
+    if(!newP.trim()){setErr('Escribe el nombre del proyecto');return;}
+    if(projects.includes(newP.trim())){setErr('Este proyecto ya existe');return;}
+    setProjects([...projects,newP.trim()]);setNewP('');setErr('');
+  }
+  function remove(p){if(window.confirm(`¿Eliminar el proyecto "${p}"? Los leads de este proyecto no se eliminarán.`))setProjects(projects.filter(x=>x!==p));}
+  return(
+    <div>
+      <div className="card">
+        <div className="card-title" style={{marginBottom:'1rem'}}>🏡 Gestión de Proyectos Inmobiliarios</div>
+        <div style={{display:'flex',gap:'.5rem',marginBottom:'.5rem'}}>
+          <input className="search-input" style={{flex:1}} value={newP} onChange={e=>setNewP(e.target.value)} placeholder="Nombre del nuevo proyecto..." onKeyDown={e=>e.key==='Enter'&&add()}/>
+          <button className="btn btn-primary" onClick={add}>+ Agregar</button>
+        </div>
+        {err&&<div className="error-msg" style={{marginBottom:'.5rem'}}>{err}</div>}
+        <div style={{marginTop:'1rem',display:'flex',flexDirection:'column',gap:'.5rem'}}>
+          {projects.map((p,i)=>(
+            <div key={p} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'11px 16px',background:'var(--green-pale)',border:'1px solid var(--green-light)',borderRadius:'10px'}}>
+              <div className="flex"><span style={{color:'var(--muted)',fontSize:'12px',minWidth:'20px'}}>#{i+1}</span><span className="fw6">{p}</span></div>
+              <button className="btn btn-danger btn-sm" onClick={()=>remove(p)}>Eliminar</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── ADVISORS ────────────────────────────────────
+function AdvisorsPage({advisors,setAdvisors,tasks}){
+  const[showAdd,setShowAdd]=useState(false);
+  const[newA,setNewA]=useState({name:'',code:'',pass:''});
+  const[err,setErr]=useState('');
+
+  function add(){
+    if(!newA.name||!newA.code||!newA.pass){setErr('Todos los campos son obligatorios');return;}
+    if(advisors.find(a=>a.code.toUpperCase()===newA.code.toUpperCase())){setErr('Ese código ya existe');return;}
+    setAdvisors([...advisors,{...newA,id:'a'+Date.now(),code:newA.code.toUpperCase()}]);
+    setNewA({name:'',code:'',pass:''});setShowAdd(false);setErr('');
+  }
+  function remove(id){if(window.confirm('¿Eliminar este asesor?'))setAdvisors(advisors.filter(a=>a.id!==id));}
+  const[editId,setEditId]=useState(null);
+  const[editPassVal,setEditPassVal]=useState('');
+  function editPass(id){setEditId(id);setEditPassVal('');}
+  function savePass(){
+    if(!editPassVal||editPassVal.length<6){alert('La contraseña debe tener al menos 6 caracteres');return;}
+    setAdvisors(advisors.map(a=>a.id===editId?{...a,pass:editPassVal}:a));
+    setEditId(null);setEditPassVal('');
+    alert('✅ Contraseña actualizada correctamente');
+  }
+
+  return(
+    <div>
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title">🧑‍💼 Equipo de Asesores</div>
+          <button className="btn btn-primary btn-sm" onClick={()=>setShowAdd(true)}>+ Agregar asesor</button>
+        </div>
+        {showAdd&&(
+          <div style={{padding:'1rem',background:'var(--green-pale)',borderRadius:'10px',marginBottom:'1rem',border:'1px solid var(--green-light)'}}>
+            <div className="fw6" style={{marginBottom:'.8rem',color:'var(--green-dark)'}}>Nuevo asesor</div>
+            <div className="grid2">
+              <div className="field"><label>Nombre completo *</label><input value={newA.name} onChange={e=>setNewA({...newA,name:e.target.value})}/></div>
+              <div className="field"><label>Código de acceso (2-4 letras) *</label><input value={newA.code} onChange={e=>setNewA({...newA,code:e.target.value})} placeholder="Ej: FC, AR, JM"/></div>
+              <div className="field"><label>Contraseña portal asesor *</label><input value={newA.pass} onChange={e=>setNewA({...newA,pass:e.target.value})} placeholder="Contraseña que usará el asesor"/></div>
+            </div>
+            {err&&<div className="error-msg" style={{marginBottom:'.5rem'}}>{err}</div>}
+            <div className="flex"><button className="btn btn-primary btn-sm" onClick={add}>Guardar asesor</button><button className="btn btn-outline btn-sm" onClick={()=>{setShowAdd(false);setErr('')}}>Cancelar</button></div>
+          </div>
+        )}
+        <table>
+          <thead><tr><th>Nombre</th><th>Código</th><th>Contraseña portal</th><th>Tareas totales</th><th>Completadas</th><th>Tasa éxito</th><th></th></tr></thead>
+          <tbody>
+            {advisors.map(a=>{
+              const myT=tasks.filter(t=>t.advisorId===a.id);
+              const done=myT.filter(t=>t.status==='Completada').length;
+              const pct=myT.length>0?Math.round(done/myT.length*100):0;
+              return(
+                <tr key={a.id}>
+                  <td className="fw6">{a.name}</td>
+                  <td><span className="badge badge-green">{a.code}</span></td>
+                  <td><code style={{background:'var(--bg)',padding:'2px 8px',borderRadius:'5px',fontSize:'12px'}}>{a.pass}</code></td>
+                  <td>{myT.length}</td>
+                  <td>{done}</td>
+                  <td><span className={`badge ${pct>=70?'badge-green':pct>=40?'badge-gold':'badge-red'}`}>{pct}%</span></td>
+                  <td style={{display:'flex',gap:'6px'}}><button className="btn btn-sm" style={{background:'var(--green)',color:'#fff',fontSize:'11px'}} onClick={()=>editPass(a.id)}>✏️ Clave</button><button className="btn btn-danger btn-sm" onClick={()=>remove(a.id)}>Eliminar</button></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className="info-box info-gold mt2">
+          💡 Los asesores acceden al Portal Asesor con su <strong>código</strong> y <strong>contraseña</strong> desde cualquier dispositivo. Solo ven sus tareas asignadas: sin acceso a leads, estadísticas ni información del CRM administrativo.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── AI PAGE ─────────────────────────────────────
+function AIPage({leads,tasks,advisors,projects}){
+  const[query,setQuery]=useState('');
+  const[loading,setLoading]=useState(false);
+  const[response,setResponse]=useState('');
+  const[err,setErr]=useState('');
+
+  const presets=[
+    'Dame un resumen ejecutivo del estado actual del CRM',
+    'Analiza el rendimiento de los asesores y sugiere mejoras',
+    'Identifica los leads con mayor potencial de cierre',
+    'Qué proyectos tienen más actividad esta semana',
+    'Sugiere acciones de seguimiento prioritarias',
+    'Cómo mejorar la tasa de conversión de leads a reserva',
+  ];
+
+  async function ask(q){
+    const question=q||query;if(!question.trim())return;
+    setLoading(true);setErr('');setResponse('');
+    const ctx=`CRM Energy Bless - División Parcelas, Rancagua Chile. Subgerente de Ventas: Giannina Lazo. Gerente de Ventas: Francisco Avello. Gerente General: Paulina Palma.
+Total leads: ${leads.length}. Nuevos: ${leads.filter(l=>l.status==='Nuevo').length}. Contactados: ${leads.filter(l=>l.status==='Contactado').length}. Reservados: ${leads.filter(l=>l.status==='Reservado').length}. Descartados: ${leads.filter(l=>l.status==='Descartado').length}.
+Proyectos activos (${projects.length}): ${projects.join(', ')}.
+Asesores (${advisors.length}): ${advisors.map(a=>{const t=tasks.filter(x=>x.advisorId===a.id);return `${a.name}[tareas:${t.length},completadas:${t.filter(x=>x.status==='Completada').length}]`}).join(', ')}.
+Tareas totales: ${tasks.length}. Pendientes: ${tasks.filter(t=>t.status!=='Completada').length}. Completadas: ${tasks.filter(t=>t.status==='Completada').length}.
+Leads por estado: ${STATUS_OPTS.map(s=>`${s}:${leads.filter(l=>l.status===s).length}`).join(', ')}.`;
+
+    try{
+      const res=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:1000,
+          messages:[{role:'user',content:`Eres el asistente estratégico de ventas de Propiedades Energy Bless, empresa chilena especializada en parcelas rurales. Responde siempre en español, con análisis concreto y recomendaciones accionables para Giannina Lazo y su equipo.
+
+Contexto actual del CRM:
+${ctx}
+
+Consulta: ${question}`}]
+        })
+      });
+      const data=await res.json();
+      setResponse(data.content?.map(i=>i.text||'').join('')||'Sin respuesta');
+    }catch(e){setErr('Error al conectar con IA. Revisa tu conexión a internet.');}
+    setLoading(false);
+  }
+
+  return(
+    <div>
+      <div className="card">
+        <div className="card-title" style={{marginBottom:'.5rem'}}>🤖 Análisis con Inteligencia Artificial</div>
+        <p className="text-muted" style={{marginBottom:'1rem',lineHeight:'1.6'}}>El asistente IA tiene acceso completo al contexto del CRM: leads, asesores, tareas y proyectos. Puedes hacerle preguntas estratégicas o elegir una consulta frecuente.</p>
+        <div style={{display:'flex',flexWrap:'wrap',gap:'.5rem',marginBottom:'1rem'}}>
+          {presets.map(p=><button key={p} className="btn btn-outline btn-sm" style={{fontSize:'11px'}} onClick={()=>ask(p)}>{p}</button>)}
+        </div>
+        <div style={{display:'flex',gap:'.5rem'}}>
+          <input className="search-input" style={{flex:1,fontSize:'14px',padding:'10px 14px'}} value={query} onChange={e=>setQuery(e.target.value)} placeholder="Escribe tu pregunta sobre el CRM, el equipo o los proyectos..." onKeyDown={e=>e.key==='Enter'&&ask()}/>
+          <button className="btn btn-gold" style={{padding:'10px 20px'}} onClick={()=>ask()} disabled={loading}>{loading?'⏳':'Consultar'}</button>
+        </div>
+        {err&&<div className="error-msg mt1">{err}</div>}
+        {loading&&<div className="ai-box mt1"><div className="ai-header">🤖 IA analizando</div>Procesando tu consulta con el contexto completo del CRM...</div>}
+        {response&&<div className="ai-box mt1"><div className="ai-header">🤖 Respuesta del asistente IA</div>{response}</div>}
+      </div>
+    </div>
+  );
+}
+
+// ─── GUIDE PAGE ──────────────────────────────────
+function GuidePage(){
+  const sections=[
+    {icon:'🔐',title:'Accesos del sistema',content:`ADMINISTRADORES (acceso total — solo 3 personas):
+• Giannina Lazo — Subgerente de Ventas
+  Correo: giannina@energybless.cl | Clave: GL2026EB!
+
+• Francisco Avello — Gerente de Ventas
+  Correo: francisco@energybless.cl | Clave: FA2026EB!
+
+• Paulina Palma — Gerente General
+  Correo: paulina@energybless.cl | Clave: PP2026EB!
+
+PORTAL ASESORES (acceso restringido):
+Los asesores entran con su CÓDIGO (ej: FC) y su contraseña.
+Solo ven sus tareas asignadas. No ven leads ni estadísticas.`},
+    {icon:'📧',title:'Cómo importar leads desde correos de Factor Digital',content:`Paso 1: Cuando llegue un correo de jorge.verdugo a Francisco Avello con datos de un lead nuevo, copia TODO el texto del correo.
+
+Paso 2: Ve a "Importar desde Correo" en el menú lateral.
+
+Paso 3: Pega el texto copiado en el recuadro de texto.
+
+Paso 4: Haz clic en "Extraer datos automáticamente con IA".
+
+Paso 5: La IA extrae nombre, teléfono, email, motivación y presupuesto. Revisa que estén correctos.
+
+Paso 6: Haz clic en "Confirmar y agregar al CRM". ¡Listo!`},
+    {icon:'👥',title:'Gestión de leads',content:`• En "Leads" ves todos los prospectos con filtros por proyecto, estado y asesor.
+• Haz clic en "Ver / Editar" para abrir un lead y cambiar su estado, asignarle un asesor o agregar notas.
+• Estados disponibles: Nuevo → Contactado → Seguimiento → Visita agendada → Propuesta enviada → Reservado / Descartado.
+• Puedes agregar leads manualmente con el botón "+ Agregar lead".
+• Para eliminar un lead, usa el botón rojo ✕ (pide confirmación).`},
+    {icon:'✅',title:'Asignar y monitorear tareas',content:`Paso 1: Ve a "Tareas Asesores" → "+ Asignar nueva tarea".
+Paso 2: Escribe el título, las instrucciones detalladas, selecciona el asesor y el proyecto.
+Paso 3: Opcionalmente agrega fecha límite.
+Paso 4: El asesor verá la tarea en su Portal Asesor.
+Paso 5: Cuando el asesor reporte, verás su reporte y próximo contacto directo en la tabla de tareas.`},
+    {icon:'🧑‍💼',title:'Cómo deben acceder los asesores',content:`DESDE EL TELÉFONO O PC:
+1. Abre el archivo CRM_EnergyBless.html en cualquier navegador (Chrome, Safari, Firefox).
+2. En la pantalla de login, selecciona "Portal Asesor".
+3. Ingresa tu CÓDIGO (ej: FC para Franco Campos) y tu contraseña.
+4. Verás solo tus tareas pendientes.
+5. Haz clic en "Reportar resultado" para informar qué hiciste y tu próximo contacto.
+
+IMPORTANTE: Los asesores NO ven leads, estadísticas ni información de otros asesores.`},
+    {icon:'🏡',title:'Agregar y eliminar proyectos',content:`• Ve a "Proyectos" en el menú.
+• Escribe el nombre del nuevo proyecto y haz clic en "+ Agregar".
+• Para eliminar, haz clic en "Eliminar" al lado del proyecto.
+• Los leads ya registrados en ese proyecto NO se eliminan.`},
+    {icon:'🤖',title:'Análisis con IA',content:`• Ve a "Análisis con IA" para consultar al asistente sobre el CRM.
+• Usa las consultas frecuentes o escribe tu propia pregunta.
+• La IA tiene acceso al contexto real del CRM (leads, asesores, tareas, proyectos).
+• Ejemplos de preguntas: "¿Qué asesor tiene mejor rendimiento?", "¿Qué leads priorizar esta semana?", "Dame un resumen ejecutivo".`},
+    {icon:'💾',title:'Almacenamiento de datos',content:`Los datos se guardan automáticamente en el navegador (localStorage) del dispositivo donde se usa el CRM. Esto significa:
+• No se necesita internet para ver los datos guardados (solo para la IA y las fuentes de Google Fonts).
+• Los datos son por dispositivo: si usas Chrome en tu notebook, los datos están ahí.
+• Para compartir datos entre dispositivos, en el futuro se puede conectar a una base de datos online.
+• RECOMENDACIÓN: Siempre usa el mismo navegador y dispositivo para administrar el CRM.`},
+  ];
+
+  return(
+    <div>
+      {sections.map(s=>(
+        <div key={s.title} className="card">
+          <div className="card-title" style={{marginBottom:'.8rem'}}>{s.icon} {s.title}</div>
+          <pre style={{fontFamily:'DM Sans,sans-serif',fontSize:'13px',lineHeight:'1.7',color:'var(--text)',whiteSpace:'pre-wrap'}}>{s.content}</pre>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ─── ROOT ────────────────────────────────────────
+function Root(){
+  const[user,setUser]=useState(null);
+  const[type,setType]=useState(null);
+  function handleLogin(u,t){setUser(u);setType(t);}
+  function handleLogout(){setUser(null);setType(null);}
+  if(!user)return <Login onLogin={handleLogin}/>;
+  if(type==='advisor')return <AdvisorPortal user={user} onLogout={handleLogout}/>;
+  return <AdminApp user={user} onLogout={handleLogout}/>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Root/>);
+</script>
+</body>
+</html>
