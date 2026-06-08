@@ -298,6 +298,10 @@ function Login({onLogin}){
 // ═══════════════════════════════════════════════
 function AdvisorPortal({user,onLogout}){
   const[tasks,setTasks]=useState(()=>gs('eb_tasks',[]));
+  const[reservas,setReservas]=useState(()=>gs('eb_reservas',RESERVAS_INIT));
+  const[escrituras,setEscrituras]=useState(()=>gs('eb_escrituras',ESCRITURAS_INIT));
+  const saveRes=r=>{setReservas(r);ss('eb_reservas',r)};
+  const saveEsc=e=>{setEscrituras(e);ss('eb_escrituras',e)};
   const[tab,setTab]=useState('pending');
   const myTasks=tasks.filter(t=>t.advisorId===user.id);
   const pending=myTasks.filter(t=>t.status!=='Completada');
@@ -426,6 +430,10 @@ function AdminApp({user,onLogout}){
   const[page,setPage]=useState('dashboard');
   const[leads,setLeads]=useState(()=>gs('eb_leads',initLeads));
   const[tasks,setTasks]=useState(()=>gs('eb_tasks',[]));
+  const[reservas,setReservas]=useState(()=>gs('eb_reservas',RESERVAS_INIT));
+  const[escrituras,setEscrituras]=useState(()=>gs('eb_escrituras',ESCRITURAS_INIT));
+  const saveRes=r=>{setReservas(r);ss('eb_reservas',r)};
+  const saveEsc=e=>{setEscrituras(e);ss('eb_escrituras',e)};
   const[projects,setProjects]=useState(()=>gs('eb_projects',PROJECTS_INIT));
   const[advisors,setAdvisors]=useState(()=>gs('eb_advisors',ADVISORS_INIT));
 
@@ -445,12 +453,15 @@ function AdminApp({user,onLogout}){
     {id:'tasks',icon:'✅',label:'Tareas Asesores'},
     {id:'projects',icon:'🏡',label:'Proyectos'},
     {id:'advisors',icon:'🧑‍💼',label:'Equipo Asesores'},
+    {section:'Ventas'},
+    {id:'reservas',icon:'📋',label:'Reservas'},
+    {id:'escrituras',icon:'📝',label:'Escrituras'},
     {section:'Herramientas'},
     {id:'ai',icon:'🤖',label:'Análisis con IA'},
     {id:'guide',icon:'📖',label:'Guía de Uso'},
   ];
 
-  const pageTitle={dashboard:'Dashboard',leads:'Gestión de Leads',import:'Importar Leads desde Correo',tasks:'Tareas de Asesores',projects:'Proyectos',advisors:'Equipo de Asesores',ai:'Análisis con Inteligencia Artificial',guide:'Guía de Uso del CRM'};
+  const pageTitle={dashboard:'Dashboard',reservas:'Reservas',escrituras:'Escrituras',leads:'Gestión de Leads',import:'Importar Leads desde Correo',tasks:'Tareas de Asesores',projects:'Proyectos',advisors:'Equipo de Asesores',ai:'Análisis con Inteligencia Artificial',guide:'Guía de Uso del CRM'};
   const nuevosCount=leads.filter(l=>l.status==='Nuevo').length;
 
   return(
@@ -495,6 +506,8 @@ function AdminApp({user,onLogout}){
           {page==='projects'&&<ProjectsPage projects={projects} setProjects={saveP}/>}
           {page==='advisors'&&<AdvisorsPage advisors={advisors} setAdvisors={saveA} tasks={tasks}/>}
           {page==='ai'&&<AIPage leads={leads} tasks={tasks} advisors={advisors} projects={projects}/>}
+          {page==='reservas'&&<VentasPage tipo='reserva' ventas={reservas} setVentas={saveRes} advisors={advisors} projects={projects} leads={leads}/>}
+          {page==='escrituras'&&<VentasPage tipo='escritura' ventas={escrituras} setVentas={saveEsc} advisors={advisors} projects={projects} leads={leads}/>}
           {page==='guide'&&<GuidePage/>}
         </div>
       </div>
@@ -1104,6 +1117,189 @@ Consulta: ${question}`}]
 }
 
 // ─── GUIDE PAGE ──────────────────────────────────
+const RESERVAS_INIT=[
+  {id:'r1',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 23',asesores:'Cristobal Pérez',lead:'',fecha:'2026-05-01'},
+  {id:'r2',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 12',asesores:'Pauli y Gianni',lead:'',fecha:'2026-05-01'},
+  {id:'r3',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 11',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r4',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 60',asesores:'Tomas Alliende',lead:'',fecha:'2026-05-01'},
+  {id:'r5',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 125',asesores:'Cristobal Pérez',lead:'',fecha:'2026-05-01'},
+  {id:'r6',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 22',asesores:'Cristobal y Marilia',lead:'',fecha:'2026-05-01'},
+  {id:'r7',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 5',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r8',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 160',asesores:'Pauli y Trinidad',lead:'',fecha:'2026-05-01'},
+  {id:'r9',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 169',asesores:'Pauli y Trinidad',lead:'',fecha:'2026-05-01'},
+  {id:'r10',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 119',asesores:'Pauli y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'r11',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 98',asesores:'David León',lead:'',fecha:'2026-05-01'},
+  {id:'r12',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 24',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r13',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 25',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r14',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 10',asesores:'Constanza Nuñez',lead:'',fecha:'2026-05-01'},
+  {id:'r15',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 15',asesores:'Marisol Soto',lead:'',fecha:'2026-05-01'},
+  {id:'r16',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 130',asesores:'Marisol y Milton C.',lead:'',fecha:'2026-05-01'},
+  {id:'r17',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 20',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r18',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 14',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'r19',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 10',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'r20',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 17',asesores:'Alvaro y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'r21',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 21',asesores:'Javiera Caroca',lead:'',fecha:'2026-05-01'},
+  {id:'r22',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 50',asesores:'Javiera Caroca',lead:'',fecha:'2026-05-01'},
+  {id:'r23',mes:'Mayo',proyecto:'Costa Dorada de Llico',parcela:'Pc 19',asesores:'Marilia Martinez',lead:'',fecha:'2026-05-01'},
+  {id:'r24',mes:'Mayo',proyecto:'Costa Dorada de Llico',parcela:'Pc 20',asesores:'Francisca Godoy',lead:'',fecha:'2026-05-01'},
+  {id:'r25',mes:'Mayo',proyecto:'Lomas de Chicalindo',parcela:'Pc 17',asesores:'Roxana Gatica',lead:'',fecha:'2026-05-01'},
+  {id:'r26',mes:'Mayo',proyecto:'Alto los Romeros',parcela:'Pc 11',asesores:'Jonathan Acosta',lead:'',fecha:'2026-05-01'},
+  {id:'r27',mes:'Junio',proyecto:'Refugio Paredones',parcela:'Pc 4',asesores:'Alvaro Rojas',lead:'',fecha:'2026-06-01'},
+  {id:'r28',mes:'Junio',proyecto:'Macrolote Estancia',parcela:'Pc F8',asesores:'Francisca Godoy',lead:'',fecha:'2026-06-01'},
+  {id:'r29',mes:'Junio',proyecto:'Lomas de Chicalindo',parcela:'Pc 2',asesores:'Elias y Milton C.',lead:'',fecha:'2026-06-01'},
+];
+
+const ESCRITURAS_INIT=[
+  {id:'e1',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 14',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'e2',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 17',asesores:'Alvaro y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'e3',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 10',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'e4',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc F32',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'e5',mes:'Mayo',proyecto:'Estancia el Señorio',parcela:'Pc B10',asesores:'Paulina Palma',lead:'',fecha:'2026-05-01'},
+  {id:'e6',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 18',asesores:'Javiera Caroca',lead:'',fecha:'2026-05-01'},
+  {id:'e7',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 22',asesores:'Marisol Soto',lead:'',fecha:'2026-05-01'},
+  {id:'e8',mes:'Mayo',proyecto:'Lomas de Chicalindo',parcela:'Pc 8',asesores:'Roxana y Alvaro',lead:'',fecha:'2026-05-01'},
+  {id:'e9',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 22',asesores:'Cristobal y Marilia',lead:'',fecha:'2026-05-01'},
+  {id:'e10',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 60',asesores:'Tomas Alliende',lead:'',fecha:'2026-05-01'},
+  {id:'e11',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 103',asesores:'Cristobal Perez',lead:'',fecha:'2026-05-01'},
+  {id:'e12',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 12',asesores:'Pauli y Gianni',lead:'',fecha:'2026-05-01'},
+  {id:'e13',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 125',asesores:'Cristobal Perez',lead:'',fecha:'2026-05-01'},
+  {id:'e14',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 23',asesores:'Cristobal Perez',lead:'',fecha:'2026-05-01'},
+  {id:'e15',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 119',asesores:'Pauli y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'e16',mes:'Mayo',proyecto:'Praderas de San Nicolas',parcela:'Pc 57',asesores:'Roxana Gatica',lead:'',fecha:'2026-05-01'},
+  {id:'e17',mes:'Junio',proyecto:'Praderas de Caone',parcela:'Pc 17',asesores:'Marisol y Franco A.',lead:'',fecha:'2026-06-01'},
+  {id:'e18',mes:'Junio',proyecto:'Praderas de Caone',parcela:'Pc 5',asesores:'Franco Campos',lead:'',fecha:'2026-06-01'},
+  {id:'e19',mes:'Junio',proyecto:'Praderas de Caone',parcela:'Pc 11',asesores:'Franco Campos',lead:'',fecha:'2026-06-01'},
+];
+
+function VentasPage({tipo,ventas,setVentas,advisors,projects,leads}){
+  const titulo=tipo==='reserva'?'Reservas':'Escrituras';
+  const emoji=tipo==='reserva'?'📋':'📝';
+  const[showAdd,setShowAdd]=useState(false);
+  const[filtroMes,setFiltroMes]=useState('Todos');
+  const[filtroProj,setFiltroProj]=useState('');
+  const[editId,setEditId]=useState(null);
+  const[form,setForm]=useState({mes:'',proyecto:'',parcela:'',asesores:'',lead:'',fecha:new Date().toISOString().split('T')[0]});
+  const[err,setErr]=useState('');
+
+  const meses=['Todos','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const filtered=ventas.filter(v=>{
+    const okMes=filtroMes==='Todos'||v.mes===filtroMes;
+    const okProj=!filtroProj||v.proyecto.toLowerCase().includes(filtroProj.toLowerCase());
+    return okMes&&okProj;
+  });
+
+  const byProject=filtered.reduce((acc,v)=>{
+    if(!acc[v.proyecto])acc[v.proyecto]=[];
+    acc[v.proyecto].push(v);
+    return acc;
+  },{});
+
+  function save(){
+    if(!form.proyecto||!form.parcela||!form.asesores||!form.mes){setErr('Proyecto, parcela, asesores y mes son obligatorios');return;}
+    if(editId){
+      setVentas(ventas.map(v=>v.id===editId?{...form,id:editId}:v));
+      setEditId(null);
+    } else {
+      setVentas([...ventas,{...form,id:'v'+Date.now()}]);
+    }
+    setForm({mes:'',proyecto:'',parcela:'',asesores:'',lead:'',fecha:new Date().toISOString().split('T')[0]});
+    setShowAdd(false);setErr('');
+  }
+
+  function edit(v){setForm({...v});setEditId(v.id);setShowAdd(true);}
+  function remove(id){if(window.confirm('¿Eliminar este registro?'))setVentas(ventas.filter(v=>v.id!==id));}
+
+  const leadMatch=(leadStr)=>{
+    if(!leadStr)return null;
+    return leads.find(l=>l.name&&l.name.toLowerCase().includes(leadStr.toLowerCase()));
+  };
+
+  return(
+    <div>
+      <div className="card" style={{marginBottom:'1rem'}}>
+        <div className="card-header">
+          <div className="card-title">{emoji} {titulo} — División Parcelas</div>
+          <button className="btn btn-primary btn-sm" onClick={()=>{setShowAdd(true);setEditId(null);setForm({mes:'',proyecto:'',parcela:'',asesores:'',lead:'',fecha:new Date().toISOString().split('T')[0]});}}>+ Agregar {tipo}</button>
+        </div>
+        <div style={{display:'flex',gap:'12px',flexWrap:'wrap',marginBottom:'1rem'}}>
+          <div className="field" style={{margin:0}}>
+            <label>Filtrar por mes</label>
+            <select value={filtroMes} onChange={e=>setFiltroMes(e.target.value)}>
+              {meses.map(m=><option key={m}>{m}</option>)}
+            </select>
+          </div>
+          <div className="field" style={{margin:0,flex:1}}>
+            <label>Buscar proyecto</label>
+            <input value={filtroProj} onChange={e=>setFiltroProj(e.target.value)} placeholder="Nombre del proyecto..."/>
+          </div>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px',marginBottom:'1rem'}}>
+          <div className="stat-card"><div className="stat-label">Total {titulo}</div><div className="stat-num">{ventas.length}</div></div>
+          <div className="stat-card"><div className="stat-label">Filtrados</div><div className="stat-num">{filtered.length}</div></div>
+          <div className="stat-card gold"><div className="stat-label">Proyectos</div><div className="stat-num" style={{color:'var(--gold)'}}>{Object.keys(byProject).length}</div></div>
+        </div>
+      </div>
+
+      {showAdd&&(
+        <div className="card" style={{marginBottom:'1rem',border:'2px solid var(--green)'}}>
+          <div className="card-title" style={{marginBottom:'1rem'}}>{editId?'Editar':'Nuevo'} {tipo}</div>
+          <div className="grid2">
+            <div className="field"><label>Mes *</label>
+              <select value={form.mes} onChange={e=>setForm({...form,mes:e.target.value})}>
+                <option value="">Seleccionar mes</option>
+                {meses.slice(1).map(m=><option key={m}>{m}</option>)}
+              </select>
+            </div>
+            <div className="field"><label>Fecha</label><input type="date" value={form.fecha} onChange={e=>setForm({...form,fecha:e.target.value})}/></div>
+            <div className="field"><label>Proyecto *</label>
+              <select value={form.proyecto} onChange={e=>setForm({...form,proyecto:e.target.value})}>
+                <option value="">Seleccionar proyecto</option>
+                {projects.map(p=><option key={p}>{p}</option>)}
+              </select>
+            </div>
+            <div className="field"><label>Parcela *</label><input value={form.parcela} onChange={e=>setForm({...form,parcela:e.target.value})} placeholder="Ej: Pc 23"/></div>
+            <div className="field"><label>Asesor(es) *</label><input value={form.asesores} onChange={e=>setForm({...form,asesores:e.target.value})} placeholder="Ej: Franco Campos"/></div>
+            <div className="field"><label>Lead vinculado (nombre)</label><input value={form.lead} onChange={e=>setForm({...form,lead:e.target.value})} placeholder="Nombre del cliente (opcional)"/></div>
+          </div>
+          {err&&<div className="error-msg">{err}</div>}
+          <div className="flex"><button className="btn btn-primary btn-sm" onClick={save}>Guardar</button><button className="btn btn-outline btn-sm" onClick={()=>{setShowAdd(false);setErr('');}}>Cancelar</button></div>
+        </div>
+      )}
+
+      {Object.keys(byProject).length===0&&<div className="card" style={{textAlign:'center',color:'var(--muted)',padding:'2rem'}}>No hay {titulo.toLowerCase()} registradas</div>}
+
+      {Object.entries(byProject).map(([proj,items])=>(
+        <div key={proj} className="card" style={{marginBottom:'1rem'}}>
+          <div className="card-header">
+            <div className="card-title" style={{fontSize:'14px'}}>🏡 {proj} <span className="badge badge-green" style={{marginLeft:'8px'}}>{items.length}</span></div>
+          </div>
+          <table>
+            <thead><tr><th>Parcela</th><th>Asesor(es)</th><th>Lead vinculado</th><th>Mes</th><th>Fecha</th><th></th></tr></thead>
+            <tbody>
+              {items.map(v=>{
+                const lead=leadMatch(v.lead);
+                return(
+                  <tr key={v.id}>
+                    <td><code style={{background:'var(--green-pale)',padding:'2px 8px',borderRadius:'4px'}}>{v.parcela}</code></td>
+                    <td className="fw6">{v.asesores}</td>
+                    <td>{v.lead?<span style={{color:lead?'var(--green)':'var(--muted)',fontSize:'12px'}}>{lead?'✅ '+lead.name:'⚠️ '+v.lead+' (no vinculado)'}</span>:<span style={{color:'var(--muted)',fontSize:'12px'}}>—</span>}</td>
+                    <td><span className="badge badge-gold">{v.mes}</span></td>
+                    <td className="text-muted" style={{fontSize:'12px'}}>{v.fecha}</td>
+                    <td style={{display:'flex',gap:'4px'}}>
+                      <button className="btn btn-sm" style={{background:'var(--green)',color:'#fff',fontSize:'11px'}} onClick={()=>edit(v)}>✏️</button>
+                      <button className="btn btn-danger btn-sm" onClick={()=>remove(v.id)}>✕</button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function GuidePage(){
   const sections=[
     {icon:'🔐',title:'Accesos del sistema',content:`ADMINISTRADORES (acceso total — solo 3 personas):
