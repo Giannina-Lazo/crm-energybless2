@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CRM · Energy Bless Propiedades</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}:root{
+  --forest: #334155;        /* Marrón oscuro cálido */
+  --forest2: #475569;       /* Marrón medio */
+  --sage: #64748b;          /* Beige con verde suave */
+  --mint: #cbd5e1;          /* Verde grisáceo */
+  --foam: #e2e8f0;          /* Crema */
+  --mist: #f8fafc;          /* Crema muy claro */
+  --snow: #f8fafc;          /* Blanco hueso */
+  --champagne: #d4a017;     /* Champagne dorado elegante */
+  --gold: #eab308;          /* Dorado cálido */
+  --gold-soft: #eff6ff;     /* Dorado pastel suave */
+  --gold-mist: #fef9c3;     /* Dorado muy claro */
+  --bg: #ffffff;            /* Fondo cálido */
+  --card: #ffffff;          /* Tarjetas blancas cálidas */
+  --border: #cbd5e1;        /* Bordes beige */
+  --border2: #cbd5e1;       /* Bordes secundarios */
+  --text: #1e293b;          /* Texto principal marrón oscuro */
+  --text2: #334155;         /* Texto secundario */
+  --muted: #475569;         /* Texto suave */
+  --muted2: #64748b;        /* Texto más claro */
+  --danger: #dc2626;        /* Rojo cálido */
+  --danger-soft: #f5d5d5;   /* Rojo pastel */
+  --warn: #b45309;          /* Amarillo quemado */
+  --warn-soft: #fde68a;     /* Amarillo pastel */
+  --info: #475569;          /* Azul grisáceo suave */
+  --info-soft: #e2e8f0;     /* Azul pastel suave */
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow: 0 2px 12px rgba(30,41,59, 0.1);
+  --shadow-md: 0 6px 24px rgba(30,41,59, 0.16);
+  --shadow-lg: 0 14px 48px rgba(30,41,59, 0.22);
+}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;background:linear-gradient(145deg,var(--forest) 0%,var(--forest2) 40%,var(--sage) 80%,#1d4ed8 100%);display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-box{background:rgba(255,255,255,0.97);border-radius:24px;padding:2.8rem 2.4rem;width:100%;max-width:400px;box-shadow:0 32px 80px rgba(0,0,0,0.35)}
+.login-logo{text-align:center;margin-bottom:1.8rem}
+.login-logo .emblem{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--forest),var(--sage));display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:28px;box-shadow:0 8px 24px rgba(15,45,31,0.3)}
+.login-logo .brand{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--forest);letter-spacing:1px}
+.login-logo .sub{font-size:11px;color:var(--champagne);letter-spacing:3px;text-transform:uppercase;margin-top:6px;font-weight:500}
+.divider-gold{width:48px;height:2px;background:linear-gradient(90deg,transparent,var(--champagne),transparent);margin:12px auto}
+/* FORMS */
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+.field input,.field select,.field textarea,input.fi,select.fi,textarea.fi{width:100%;padding:11px 14px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:14px;color:var(--text);background:var(--snow);transition:all .2s}
+.field input:focus,.field select:focus,.field textarea:focus,input.fi:focus,select.fi:focus{outline:none;border-color:var(--sage);background:#fff;box-shadow:0 0 0 3px rgba(30,58,138,0.1)}
+.field textarea{resize:vertical;min-height:80px}
+input.search{padding:9px 14px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:13px;background:var(--snow);color:var(--text)}
+input.search:focus,select.search:focus{outline:none;border-color:var(--sage);background:#fff}
+select.search{padding:9px 14px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:13px;background:var(--snow);color:var(--text)}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--sage),var(--forest2));color:#fff;box-shadow:0 4px 14px rgba(30,58,138,0.3)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(30,58,138,0.4)}
+.btn-gold{background:linear-gradient(135deg,var(--champagne),#ca8a04);color:#fff}
+.btn-gold:hover{transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--sage);border:1.5px solid var(--border2)}
+.btn-outline:hover{background:var(--mist);border-color:var(--sage)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{background:#b91c1c}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-xs{padding:4px 9px;font-size:11px;border-radius:7px}
+.btn-full{width:100%;justify-content:center;padding:13px}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-green{background:#dbeafe;color:#0f5e32}
+.badge-gold{background:var(--gold-soft);color:#854d0e}
+.badge-red{background:#fef2f2;color:var(--danger)}
+.badge-blue{background:#dbeafe;color:#1a4d8a}
+.badge-gray{background:#e2e8f0;color:#334155}
+.badge-purple{background:#ede9fe;color:#6d28d9}
+.badge-forest{background:var(--forest);color:#fff}
+/* LAYOUT */
+.app{display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--forest);flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto}
+.sidebar-brand{padding:1.4rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.logo-row{display:flex;align-items:center;gap:12px}
+.logo-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--sage),var(--mint));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sidebar-brand .brand{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:#fff}
+.sidebar-brand .sub{font-size:9.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.sidebar-user{padding:.9rem 1.4rem;border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(0,0,0,0.18)}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--champagne),#ca8a04);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;margin-bottom:8px}
+.sidebar-user .name{font-size:13px;font-weight:600;color:#fff}
+.sidebar-user .role{font-size:10px;color:rgba(168,221,192,0.8);margin-top:1px}
+.sidebar-nav{flex:1;padding:.6rem 0}
+.nav-section{padding:10px 1.4rem 4px;font-size:9.5px;color:rgba(255,255,255,0.28);letter-spacing:2.5px;text-transform:uppercase;font-weight:600}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 1.4rem;color:rgba(255,255,255,0.58);cursor:pointer;transition:all .18s;font-size:13px;font-weight:500;border-left:3px solid transparent}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:#fff}
+.nav-item.active{background:rgba(255,255,255,0.1);color:#fff;border-left-color:var(--gold)}
+.nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--gold);color:var(--forest);font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px}
+.sidebar-footer{padding:1rem 1.4rem;border-top:1px solid rgba(255,255,255,0.08)}
+.sidebar-status{font-size:10px;color:rgba(59,130,246,0.7);display:flex;align-items:center;gap:5px;margin-bottom:8px}
+.sidebar-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--mint);flex-shrink:0}
+.main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:rgba(255,255,255,0.92);border-bottom:1px solid var(--border);padding:.85rem 1.8rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;backdrop-filter:blur(12px)}
+.topbar-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--forest)}
+.topbar-right{display:flex;align-items:center;gap:.7rem}
+.page-content{padding:1.6rem;flex:1}
+/* CARDS */
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.3rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--forest)}
+.card-subtitle{font-size:12px;color:var(--muted);margin-top:2px}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.4rem}
+.stat-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.1rem 1.3rem;position:relative;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:all .2s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--mint))}
+.stat-card.gold::after{background:linear-gradient(90deg,var(--champagne),var(--gold))}
+.stat-card.info::after{background:linear-gradient(90deg,var(--info),#3b82f6)}
+.stat-card.warn::after{background:linear-gradient(90deg,var(--warn),#f59e0b)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--forest);margin-top:5px;line-height:1}
+.stat-card.gold .stat-num{color:var(--champagne)}
+.stat-label{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600}
+.stat-change{font-size:11px;color:var(--mint);margin-top:5px;font-weight:500}
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--snow);color:var(--forest2);font-weight:700;padding:9px 12px;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.9px;border-bottom:2px solid var(--border)}
+td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--snow)}
+.action-btns{display:flex;gap:5px;flex-wrap:wrap}
+.tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;background:var(--mist);color:var(--forest2);border:1px solid var(--foam);font-weight:500}
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;backdrop-filter:blur(3px)}
+.modal{background:#fff;border-radius:20px;padding:2rem;width:100%;max-width:520px;margin:auto;box-shadow:var(--shadow-lg)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--forest);margin-bottom:1.2rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+.modal-footer{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border)}
+/* MISC */
+.tabs{display:flex;gap:3px;margin-bottom:1.2rem;background:var(--snow);padding:4px;border-radius:10px;border:1px solid var(--border)}
+.tab{flex:1;padding:9px;text-align:center;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--muted);transition:all .2s}
+.tab.active{background:#fff;color:var(--forest);font-weight:700;box-shadow:0 1px 8px rgba(15,45,31,0.1)}
+.info-box{padding:1rem 1.2rem;border-radius:var(--radius-sm);font-size:13px;line-height:1.6}
+.info-green{background:var(--mist);border:1px solid var(--foam);color:var(--forest2)}
+.info-gold{background:var(--gold-mist);border:1px solid var(--gold-soft);color:#854d0e}
+.info-blue{background:var(--info-soft);border:1px solid #bfdbfe;color:var(--info)}
+.ai-box{background:linear-gradient(135deg,var(--snow),var(--gold-mist));border:1.5px solid var(--foam);border-radius:var(--radius);padding:1.3rem;font-size:13px;line-height:1.8;white-space:pre-wrap;margin-top:.8rem}
+.ai-header{font-size:10px;font-weight:700;color:var(--champagne);letter-spacing:2px;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:6px}
+.prog-bar{background:var(--border);border-radius:6px;height:8px;overflow:hidden}
+.prog-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--sage),var(--mint))}
+.err,.error-msg{color:var(--danger);font-size:12px;margin-top:6px;padding:7px 12px;background:var(--danger-soft);border-radius:7px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.flex{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.text-muted{color:var(--muted);font-size:12px}
+.text-sm{font-size:12px}
+.mt1{margin-top:.5rem}.mt2{margin-top:1rem}
+.fw6{font-weight:600}.fw7{font-weight:700}
+/* ADVISOR PORTAL */
+.advisor-portal{min-height:100vh;background:var(--bg)}
+.advisor-header{background:linear-gradient(135deg,var(--forest),var(--forest2));color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.advisor-content{padding:1.5rem;max-width:720px;margin:0 auto}
+.task-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:1.2rem;margin-bottom:1rem;border-left:4px solid var(--sage);box-shadow:var(--shadow)}
+.task-card.done{border-left-color:var(--mint);opacity:.75}
+.task-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem;gap:.5rem}
+.task-title{font-weight:700;color:var(--forest);font-size:14px}
+.task-body{font-size:13px;color:var(--muted);line-height:1.55}
+.task-form{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)}
+/* FORMULARIOS */
+.formularios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem}
+.formulario-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.4rem;text-align:center;cursor:pointer;transition:all .22s;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.formulario-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--mint))}
+.formulario-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--sage)}
+.fc-icon{font-size:34px;margin-bottom:.7rem;display:block}
+.fc-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--forest);margin-bottom:.3rem}
+.fc-desc{font-size:11.5px;color:var(--muted);line-height:1.5}
+.fc-badge{margin-top:.7rem;display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:var(--mist);color:var(--sage)}
+/* LOADING */
+.loading-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a,#1e3a8a);flex-direction:column;gap:1rem}
+.loading-screen .brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:700}
+.loading-screen .sub{color:rgba(255,255,255,0.6)}
+/* IMPORT */
+.import-box{border:2px dashed var(--foam);border-radius:var(--radius);padding:1.5rem;text-align:center;background:var(--snow);margin-bottom:1rem}
+.import-box textarea{width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:.9rem;font-family:'Outfit',sans-serif;font-size:13px;min-height:140px;margin-top:.8rem;resize:vertical;background:#fff}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:var(--foam);border-radius:4px}
+@media(max-width:768px){
+  .sidebar{width:100%;height:auto;position:relative}
+  .main{margin-left:0}
+  .stats-grid,.formularios-grid{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+  .app{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+// ===================== DATOS =====================
+const SUPA_URL = 'https://lsndnjtjnajqiqnvvppi.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbmRuanRqbmFqcWlxbnZ2cHBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MzE1NjEsImV4cCI6MjA5NjIwNzU2MX0.4SN9hRwHD2Cgs1xJPUMLm5_Is7_eR3PFXnD7WSvPCNU';
+const SB_H = {'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=representation'};
+
+const ADMINS = [
+  {id:'u1',name:'Giannina Lazo',role:'Subgerente de Ventas',email:'giannina@energybless.cl',pass:'GL2026EB!',type:'admin'},
+  {id:'u2',name:'Francisco Avello',role:'Gerente de Ventas',email:'francisco@energybless.cl',pass:'FA2026EB!',type:'admin'},
+  {id:'u3',name:'Paulina Palma',role:'Gerente General',email:'paulina@energybless.cl',pass:'PP2026EB!',type:'admin'}
+];
+
+const PROJS_INIT = ['Praderas de Caone','Terrazas de Lolol','Praderas de San Nicolás','Costa Dorada (Llico)','Valle Verde','Refugio Paredones','Chicalindo','Alto Romeros'];
+
+const ADVS_INIT = [
+  {id:'a01',name:'Alvaro Rojas',code:'AR',pass:'AR2026EB!'},{id:'a02',name:'Angela Vasquez',code:'AV',pass:'AV2026EB!'},
+  {id:'a03',name:'Aracelly Aliaga',code:'AA',pass:'AA2026EB!'},{id:'a04',name:'Camila Gonzalez',code:'CG',pass:'CG2026EB!'},
+  {id:'a05',name:'Catalina Acevedo',code:'CA',pass:'CA2026EB!'},{id:'a06',name:'Catalina Zapata',code:'CZ',pass:'CZ2026EB!'},
+  {id:'a07',name:'Consuelo Arancibia',code:'CA2',pass:'CA22026EB!'},{id:'a08',name:'Constanza Nuñez',code:'CN',pass:'CN2026EB!'},
+  {id:'a09',name:'Cristobal Perez',code:'CP',pass:'CP2026EB!'},{id:'a10',name:'Cristopher Gonzalez',code:'CG2',pass:'CG22026EB!'},
+  {id:'a11',name:'David Leon',code:'DL',pass:'DL2026EB!'},{id:'a12',name:'Diana Galarce',code:'DG',pass:'DG2026EB!'},
+  {id:'a13',name:'Elias Zuniga',code:'EZ',pass:'EZ2026EB!'},{id:'a14',name:'Erik Saez',code:'ES',pass:'ES2026EB!'},
+  {id:'a15',name:'Fays Zerega',code:'FZ',pass:'FZ2026EB!'},{id:'a16',name:'Fernanda Arriagada',code:'FA2',pass:'FA22026EB!'},
+  {id:'a17',name:'Francisco Avello',code:'FA',pass:'FA2026EB!'},{id:'a18',name:'Francisca Godoy',code:'FG',pass:'FG2026EB!'},
+  {id:'a19',name:'Franco Campos',code:'FC',pass:'FC2026EB!'},{id:'a20',name:'Giannina Lazo',code:'GL',pass:'GL2026EB!'},
+  {id:'a21',name:'Guillermo Tello',code:'GT',pass:'GT2026EB!'},{id:'a22',name:'Javiera Caroca',code:'JC',pass:'JC2026EB!'},
+  {id:'a23',name:'Jazmin Molina',code:'JM',pass:'JM2026EB!'},{id:'a24',name:'Jonathan Acosta',code:'JA',pass:'JA2026EB!'},
+  {id:'a25',name:'Lia Asman',code:'LA',pass:'LA2026EB!'},{id:'a26',name:'Lorena Calderon',code:'LC',pass:'LC2026EB!'},
+  {id:'a27',name:'Magali Guinazu',code:'MG',pass:'MG2026EB!'},{id:'a28',name:'Marcial Gajardo',code:'MG2',pass:'MG22026EB!'},
+  {id:'a29',name:'Maria Jesus Mieres',code:'MM',pass:'MM2026EB!'},{id:'a30',name:'Maria Jose Rubio',code:'MR',pass:'MR2026EB!'},
+  {id:'a31',name:'Marilia Martinez',code:'MM2',pass:'MM22026EB!'},{id:'a32',name:'Marisol Soto',code:'MS',pass:'MS2026EB!'},
+  {id:'a33',name:'Milton Cornejo',code:'MC',pass:'MC2026EB!'},{id:'a34',name:'Milton Toy',code:'MT',pass:'MT2026EB!'},
+  {id:'a35',name:'Paulina Palma',code:'PP',pass:'PP2026EB!'},{id:'a36',name:'Ricardo Lopez',code:'RL',pass:'RL2026EB!'},
+  {id:'a37',name:'Rodrigo Herrera',code:'RH',pass:'RH2026EB!'},{id:'a38',name:'Roxana Gatica',code:'RG',pass:'RG2026EB!'},
+  {id:'a39',name:'Sergio Carvajal',code:'SC',pass:'SC2026EB!'},{id:'a40',name:'Tomas Alliende',code:'TA',pass:'TA2026EB!'},
+  {id:'a41',name:'Trinidad Gallegos',code:'TG',pass:'TG2026EB!'},{id:'a42',name:'Yoel Arce',code:'YA',pass:'YA2026EB!'},
+  {id:'a43',name:'Yudisan',code:'YU',pass:'YU2026EB!'}
+];
+
+const SOPT = ['Nuevo','Contactado','Seguimiento','Visita agendada','Propuesta enviada','Reservado','Descartado'];
+const SCOL = {Nuevo:'badge-blue',Contactado:'badge-green',Seguimiento:'badge-gold','Visita agendada':'badge-gold','Propuesta enviada':'badge-purple',Reservado:'badge-green',Descartado:'badge-red'};
+
+const RINIT = [
+  {id:'r1',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 23',asesores:'Cristobal Pérez',lead:'',fecha:'2026-05-01'},
+  {id:'r2',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 12',asesores:'Pauli y Gianni',lead:'',fecha:'2026-05-01'},
+  {id:'r3',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 11',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r4',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 60',asesores:'Tomas Alliende',lead:'',fecha:'2026-05-01'},
+  {id:'r5',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 125',asesores:'Cristobal Pérez',lead:'',fecha:'2026-05-01'},
+  {id:'r6',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 22',asesores:'Cristobal y Marilia',lead:'',fecha:'2026-05-01'},
+  {id:'r7',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 5',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r8',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 160',asesores:'Pauli y Trinidad',lead:'',fecha:'2026-05-01'},
+  {id:'r9',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 169',asesores:'Pauli y Trinidad',lead:'',fecha:'2026-05-01'},
+  {id:'r10',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 119',asesores:'Pauli y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'r11',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 98',asesores:'David León',lead:'',fecha:'2026-05-01'},
+  {id:'r12',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 24',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r13',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 25',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r14',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 10',asesores:'Constanza Nuñez',lead:'',fecha:'2026-05-01'},
+  {id:'r15',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 15',asesores:'Marisol Soto',lead:'',fecha:'2026-05-01'},
+  {id:'r16',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 130',asesores:'Marisol y Milton C.',lead:'',fecha:'2026-05-01'},
+  {id:'r17',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 20',asesores:'Franco Campos',lead:'',fecha:'2026-05-01'},
+  {id:'r18',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 14',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'r19',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 10',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'r20',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 17',asesores:'Alvaro y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'r21',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 21',asesores:'Javiera Caroca',lead:'',fecha:'2026-05-01'},
+  {id:'r22',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 50',asesores:'Javiera Caroca',lead:'',fecha:'2026-05-01'},
+  {id:'r23',mes:'Mayo',proyecto:'Costa Dorada de Llico',parcela:'Pc 19',asesores:'Marilia Martinez',lead:'',fecha:'2026-05-01'},
+  {id:'r24',mes:'Mayo',proyecto:'Costa Dorada de Llico',parcela:'Pc 20',asesores:'Francisca Godoy',lead:'',fecha:'2026-05-01'},
+  {id:'r25',mes:'Mayo',proyecto:'Lomas de Chicalindo',parcela:'Pc 17',asesores:'Roxana Gatica',lead:'',fecha:'2026-05-01'},
+  {id:'r26',mes:'Mayo',proyecto:'Alto los Romeros',parcela:'Pc 11',asesores:'Jonathan Acosta',lead:'',fecha:'2026-05-01'},
+  {id:'r27',mes:'Junio',proyecto:'Refugio Paredones',parcela:'Pc 4',asesores:'Alvaro Rojas',lead:'',fecha:'2026-06-01'},
+  {id:'r28',mes:'Junio',proyecto:'Macrolote Estancia',parcela:'Pc F8',asesores:'Francisca Godoy',lead:'',fecha:'2026-06-01'},
+  {id:'r29',mes:'Junio',proyecto:'Lomas de Chicalindo',parcela:'Pc 2',asesores:'Elias y Milton C.',lead:'',fecha:'2026-06-01'}
+];
+
+const EINIT = [
+  {id:'e1',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 14',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'e2',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 17',asesores:'Alvaro y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'e3',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc 10',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'e4',mes:'Mayo',proyecto:'Refugio Paredones',parcela:'Pc F32',asesores:'Alvaro Rojas',lead:'',fecha:'2026-05-01'},
+  {id:'e5',mes:'Mayo',proyecto:'Estancia el Señorio',parcela:'Pc B10',asesores:'Paulina Palma',lead:'',fecha:'2026-05-01'},
+  {id:'e6',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 18',asesores:'Javiera Caroca',lead:'',fecha:'2026-05-01'},
+  {id:'e7',mes:'Mayo',proyecto:'Terrazas de Lolol',parcela:'Pc 22',asesores:'Marisol Soto',lead:'',fecha:'2026-05-01'},
+  {id:'e8',mes:'Mayo',proyecto:'Lomas de Chicalindo',parcela:'Pc 8',asesores:'Roxana y Alvaro',lead:'',fecha:'2026-05-01'},
+  {id:'e9',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 22',asesores:'Cristobal y Marilia',lead:'',fecha:'2026-05-01'},
+  {id:'e10',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 60',asesores:'Tomas Alliende',lead:'',fecha:'2026-05-01'},
+  {id:'e11',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 103',asesores:'Cristobal Perez',lead:'',fecha:'2026-05-01'},
+  {id:'e12',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 12',asesores:'Pauli y Gianni',lead:'',fecha:'2026-05-01'},
+  {id:'e13',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 125',asesores:'Cristobal Perez',lead:'',fecha:'2026-05-01'},
+  {id:'e14',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 23',asesores:'Cristobal Perez',lead:'',fecha:'2026-05-01'},
+  {id:'e15',mes:'Mayo',proyecto:'Praderas de Caone',parcela:'Pc 119',asesores:'Pauli y Francisca',lead:'',fecha:'2026-05-01'},
+  {id:'e16',mes:'Mayo',proyecto:'Praderas de San Nicolas',parcela:'Pc 57',asesores:'Roxana Gatica',lead:'',fecha:'2026-05-01'},
+  {id:'e17',mes:'Junio',proyecto:'Praderas de Caone',parcela:'Pc 17',asesores:'Marisol y Franco A.',lead:'',fecha:'2026-06-01'},
+  {id:'e18',mes:'Junio',proyecto:'Praderas de Caone',parcela:'Pc 5',asesores:'Franco Campos',lead:'',fecha:'2026-06-01'},
+  {id:'e19',mes:'Junio',proyecto:'Praderas de Caone',parcela:'Pc 11',asesores:'Franco Campos',lead:'',fecha:'2026-06-01'}
+];
+
+const LEADS_INIT = [
+  {id:'l1',name:'Benja Ignacio',email:'benjaaravenaa@gmail.com',phone:'+56961348631',project:'Praderas de Caone',motivation:'Tener un lugar para escapar los fines de semana',budget:'Entre $8 y $15 millones',status:'Nuevo',source:'Factor Digital',date:'2026-06-07',advisorId:null,notes:''}
+];
+
+// ===================== SUPABASE =====================
+async function sbGet(table, fallback) {
+  try {
+    const r = await fetch(`${SUPA_URL}/rest/v1/${table}?select=*`, {headers: SB_H});
+    if (!r.ok) return fallback;
+    const j = await r.json();
+    if (!Array.isArray(j) || !j.length) return fallback;
+    if (j[0] && j[0].data !== undefined) return j.map(x => x.data);
+    return j;
+  } catch(e) { return fallback; }
+}
+
+async function sbSet(table, arr) {
+  try {
+    await fetch(`${SUPA_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: {...SB_H, 'Prefer': 'resolution=merge-duplicates'},
+      body: JSON.stringify(arr.map(x => ({id: x.id || 'r'+Math.random(), data: x})))
+    });
+  } catch(e) {}
+}
+
+// ===================== ESTADO GLOBAL =====================
+let STATE = {
+  user: null,
+  userType: null,
+  page: 'dashboard',
+  leads: [],
+  tasks: [],
+  reservas: [],
+  escrituras: [],
+  projects: [],
+  advisors: [],
+  loading: true
+};
+
+function setState(updates) {
+  Object.assign(STATE, updates);
+  render();
+}
+
+// ===================== HELPERS =====================
+function uid() { return 't' + Date.now() + Math.random().toString(36).substr(2,5); }
+function today() { return new Date().toISOString().split('T')[0]; }
+function fmtDate(d) {
+  try { return new Date(d).toLocaleDateString('es-CL',{weekday:'short',day:'numeric',month:'short'}); }
+  catch(e) { return d; }
+}
+function escHtml(str) {
+  if(!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function advisorName(id) {
+  const a = STATE.advisors.find(x => x.id === id);
+  return a ? a.name : '<span style="color:#94a3b8">Sin asignar</span>';
+}
+function medalOf(i) { return ['🥇','🥈','🥉'][i] || (i+1); }
+
+function buildDonut(slices, size=110) {
+  const total = slices.reduce((s,x) => s+x.val, 0);
+  if (!total) return '<div style="text-align:center;color:#475569;padding:1rem;font-size:12px">Sin datos</div>';
+  let angle = -90;
+  const cx = size/2, cy = size/2, r = size*0.38, inner = size*0.22;
+  function tr(d) { return d * Math.PI / 180; }
+  let paths = '';
+  slices.forEach(s => {
+    const pct = s.val/total;
+    const a1 = angle, a2 = angle + pct*360;
+    angle = a2;
+    const x1=cx+r*Math.cos(tr(a1)), y1=cy+r*Math.sin(tr(a1));
+    const x2=cx+r*Math.cos(tr(a2)), y2=cy+r*Math.sin(tr(a2));
+    const xi1=cx+inner*Math.cos(tr(a1)), yi1=cy+inner*Math.sin(tr(a1));
+    const xi2=cx+inner*Math.cos(tr(a2)), yi2=cy+inner*Math.sin(tr(a2));
+    const lg = pct > 0.5 ? 1 : 0;
+    paths += `<path d="M${xi1},${yi1} L${x1},${y1} A${r},${r} 0 ${lg},1 ${x2},${y2} L${xi2},${yi2} A${inner},${inner} 0 ${lg},0 ${xi1},${yi1}Z" fill="${s.color}" opacity=".92"/>`;
+  });
+  const legend = slices.map(s => `<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:11.5px"><div style="width:10px;height:10px;border-radius:3px;background:${s.color};flex-shrink:0"></div><span style="flex:1">${escHtml(s.label)}</span><span style="font-weight:700;color:${s.color}">${s.val}</span></div>`).join('');
+  return `<div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex-shrink:0">${paths}
+      <text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a" font-family="Cormorant Garamond,serif">${total}</text>
+    </svg>
+    <div style="flex:1;min-width:100px">${legend}</div>
+  </div>`;
+}
+
+function buildBar(data, height=80) {
+  if (!data || !data.length) return '';
+  const max = Math.max(...data.map(d => d.val), 1);
+  const w = Math.floor(340/data.length) - 5;
+  let bars = '';
+  data.forEach((d,i) => {
+    const bH = Math.max(3, Math.round(d.val/max*height));
+    const x = i*(w+5)+2;
+    const y = height-bH;
+    bars += `<rect x="${x}" y="${y}" width="${w}" height="${bH}" rx="4" fill="url(#bg)"/>
+      <text x="${x+w/2}" y="${height+16}" text-anchor="middle" font-size="9.5" fill="#475569" font-family="Outfit,sans-serif">${escHtml(d.label)}</text>`;
+    if(d.val > 0) bars += `<text x="${x+w/2}" y="${y-4}" text-anchor="middle" font-size="9.5" fill="#1e3a8a" font-family="Outfit,sans-serif" font-weight="700">${d.val}</text>`;
+  });
+  return `<svg width="100%" viewBox="0 0 340 ${height+28}" style="overflow:visible">
+    <defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#3b82f6" stop-opacity=".7"/></linearGradient></defs>
+    ${bars}
+  </svg>`;
+}
+
+function buildFunnel(leads) {
+  const tot = leads.length;
+  const nv = leads.filter(l=>l.status==='Nuevo').length;
+  const ct = leads.filter(l=>l.status==='Contactado').length;
+  const sg = leads.filter(l=>l.status==='Seguimiento').length;
+  const va = leads.filter(l=>l.status==='Visita agendada').length;
+  const pe = leads.filter(l=>l.status==='Propuesta enviada').length;
+  const rv = leads.filter(l=>l.status==='Reservado').length;
+  const fs = [
+    {label:'Total',val:tot,color:'#0f172a'},
+    {label:'Contactados',val:ct+sg+va+pe+rv,color:'#1e3a8a'},
+    {label:'Seguimiento',val:sg+va+pe+rv,color:'#2563eb'},
+    {label:'Visita/Prop.',val:va+pe+rv,color:'#d4a017'},
+    {label:'Reservados',val:rv,color:'#eab308'}
+  ];
+  let html = '';
+  fs.forEach((s,i) => {
+    const pc = tot>0 ? Math.round(s.val/tot*100) : 0;
+    const width = 100-i*11;
+    html += `<div style="text-align:center;margin-bottom:5px">
+      <div style="width:${width}%;margin:0 auto;background:${s.color};color:#fff;border-radius:7px;padding:9px 12px;font-size:12px;font-weight:600;display:flex;justify-content:space-between;padding-left:14px;padding-right:14px">
+        <span>${escHtml(s.label)}</span>
+        <span style="background:rgba(255,255,255,0.22);border-radius:12px;padding:1px 9px">${s.val} (${pc}%)</span>
+      </div>
+      ${i < fs.length-1 ? '<div style="font-size:12px;color:#475569">▼</div>' : ''}
+    </div>`;
+  });
+  const cr = tot>0 ? Math.round(rv/tot*100) : 0;
+  html += `<div style="margin-top:1rem;padding:10px 14px;background:#eff6ff;border-radius:9px;font-size:12px;display:flex;justify-content:space-between;border:1px solid #bfdbfe">
+    <span class="fw7" style="color:#0f172a">Tasa de conversión</span>
+    <span class="fw7" style="color:#1e3a8a;font-size:15px">${cr}%</span>
+  </div>`;
+  return html;
+}
+
+function getRankingAsesores(reservas, escrituras) {
+  const rm = {};
+  reservas.forEach(r => r.asesores.split(/y|,/).map(n=>n.trim()).filter(Boolean).forEach(n => {
+    if(!rm[n]) rm[n] = {res:0,esc:0};
+    rm[n].res++;
+  }));
+  escrituras.forEach(e => e.asesores.split(/y|,/).map(n=>n.trim()).filter(Boolean).forEach(n => {
+    if(!rm[n]) rm[n] = {res:0,esc:0};
+    rm[n].esc++;
+  }));
+  return Object.entries(rm).map(([name,v]) => ({name,res:v.res,esc:v.esc,score:v.res*2+v.esc*3}))
+    .filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+}
+
+// ===================== RENDER =====================
+function render() {
+  const root = document.getElementById('root');
+  if (!STATE.user) { root.innerHTML = renderLogin(); bindLogin(); return; }
+  if (STATE.userType === 'advisor') { root.innerHTML = renderAdvisorPortal(); bindAdvisorPortal(); return; }
+  if (STATE.loading) { root.innerHTML = `<div class="loading-screen"><div class="brand">🌿 Energy Bless</div><div class="sub">Cargando datos...</div></div>`; return; }
+  root.innerHTML = renderAdminApp();
+  bindAdminApp();
+}
+
+// ===================== LOGIN =====================
+function renderLogin() {
+  return `<div class="login-wrap">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="emblem">🌿</div>
+        <div class="brand">Energy Bless</div>
+        <div class="divider-gold"></div>
+        <div class="sub">Propiedades · División Parcelas</div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" id="tab-admin" onclick="switchLoginTab('admin')">Administrativo</div>
+        <div class="tab" id="tab-advisor" onclick="switchLoginTab('advisor')">Portal Asesor</div>
+      </div>
+      <div id="login-admin-form">
+        <div class="field"><label>Correo</label><input type="email" id="l-email" placeholder="correo@energybless.cl" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+        <div class="field"><label>Contraseña</label><input type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+      </div>
+      <div id="login-advisor-form" style="display:none">
+        <div class="field"><label>Código de asesor</label><input id="l-code" placeholder="Ej: FC, AR..." onkeydown="if(event.key==='Enter')doLogin()"/></div>
+        <div class="field"><label>Contraseña</label><input type="password" id="l-pass2" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+        <div class="info-box info-green mt1" style="font-size:12px">Solo verás tus tareas asignadas.</div>
+      </div>
+      <div id="l-err" style="display:none" class="err mt1"></div>
+      <button class="btn btn-primary btn-full mt2" id="l-btn" onclick="doLogin()">Ingresar al sistema</button>
+    </div>
+  </div>`;
+}
+
+let loginMode = 'admin';
+function switchLoginTab(mode) {
+  loginMode = mode;
+  document.getElementById('tab-admin').className = 'tab' + (mode==='admin'?' active':'');
+  document.getElementById('tab-advisor').className = 'tab' + (mode==='advisor'?' active':'');
+  document.getElementById('login-admin-form').style.display = mode==='admin'?'':'none';
+  document.getElementById('login-advisor-form').style.display = mode==='advisor'?'':'none';
+  document.getElementById('l-err').style.display = 'none';
+}
+
+async function doLogin() {
+  const btn = document.getElementById('l-btn');
+  const err = document.getElementById('l-err');
+  btn.textContent = 'Ingresando...';
+  btn.disabled = true;
+  err.style.display = 'none';
+  await new Promise(r => setTimeout(r, 300));
+  if (loginMode === 'admin') {
+    const email = document.getElementById('l-email').value.trim();
+    const pass = document.getElementById('l-pass').value;
+    const u = ADMINS.find(u => u.email.toLowerCase() === email.toLowerCase() && u.pass === pass);
+    if (u) {
+      await loadAdminData(u);
+    } else {
+      err.textContent = 'Correo o contraseña incorrectos';
+      err.style.display = 'block';
+      btn.textContent = 'Ingresar al sistema';
+      btn.disabled = false;
+    }
+  } else {
+    const code = document.getElementById('l-code').value.trim();
+    const pass = document.getElementById('l-pass2').value;
+    const advList = await sbGet('eb_advisors', ADVS_INIT);
+    const u = advList.find(x => x.code.toUpperCase() === code.toUpperCase() && x.pass === pass);
+    if (u) {
+      STATE.advisors = advList;
+      STATE.user = u;
+      STATE.userType = 'advisor';
+      const tasks = await sbGet('eb_tasks', []);
+      STATE.tasks = tasks;
+      render();
+    } else {
+      err.textContent = 'Código o contraseña incorrectos';
+      err.style.display = 'block';
+      btn.textContent = 'Ingresar al sistema';
+      btn.disabled = false;
+    }
+  }
+}
+
+async function loadAdminData(user) {
+  STATE.user = user;
+  STATE.userType = 'admin';
+  STATE.loading = true;
+  render();
+  const [l,t,r,e,p,a] = await Promise.all([
+    sbGet('eb_leads', LEADS_INIT),
+    sbGet('eb_tasks', []),
+    sbGet('eb_reservas', RINIT),
+    sbGet('eb_escrituras', EINIT),
+    sbGet('eb_projects', []),
+    sbGet('eb_advisors', [])
+  ]);
+  STATE.leads = l;
+  STATE.tasks = t;
+  STATE.reservas = r.length ? r : RINIT;
+  STATE.escrituras = e.length ? e : EINIT;
+  STATE.projects = p.length ? p : PROJS_INIT;
+  STATE.advisors = a.length ? a : ADVS_INIT;
+  STATE.loading = false;
+  render();
+}
+
+function bindLogin() {}
+
+// ===================== ADMIN APP =====================
+const NAV = [
+  {s:'Principal'},
+  {id:'dashboard',icon:'📊',label:'Dashboard'},
+  {id:'leads',icon:'👥',label:'Leads'},
+  {id:'import',icon:'📧',label:'Importar desde Correo'},
+  {s:'Gestión'},
+  {id:'tasks',icon:'✅',label:'Tareas Asesores'},
+  {id:'formularios',icon:'📄',label:'Formularios de Reserva'},
+  {id:'projects',icon:'🏡',label:'Proyectos'},
+  {id:'advisors',icon:'🧑‍💼',label:'Equipo Asesores'},
+  {s:'Ventas'},
+  {id:'reservas',icon:'📋',label:'Reservas'},
+  {id:'escrituras',icon:'📝',label:'Escrituras'},
+  {s:'Análisis'},
+  {id:'metricas',icon:'📈',label:'Métricas'},
+  {id:'informes',icon:'🏆',label:'Informes'},
+  {id:'ai',icon:'🤖',label:'Análisis IA'}
+];
+
+const PAGE_TITLES = {dashboard:'Dashboard',leads:'Leads',import:'Importar desde Correo',tasks:'Tareas',formularios:'Formularios de Reserva',projects:'Proyectos',advisors:'Equipo Asesores',reservas:'Reservas',escrituras:'Escrituras',metricas:'Métricas',informes:'Informes',ai:'Análisis IA'};
+
+function renderAdminApp() {
+  const {user, page, leads} = STATE;
+  const ini = user.name.split(' ').map(n=>n[0]).slice(0,2).join('');
+  const nc = leads.filter(l=>l.status==='Nuevo').length;
+  const navHtml = NAV.map(n => {
+    if (n.s) return `<div class="nav-section">${n.s}</div>`;
+    const badge = n.id==='leads' && nc>0 ? `<span class="nav-badge">${nc}</span>` : '';
+    return `<div class="nav-item${page===n.id?' active':''}" onclick="goPage('${n.id}')"><span class="nav-icon">${n.icon}</span><span>${n.label}</span>${badge}</div>`;
+  }).join('');
+
+  let pageContent = '';
+  if (page==='dashboard') pageContent = renderDash();
+  else if (page==='leads') pageContent = renderLeads();
+  else if (page==='import') pageContent = renderImport();
+  else if (page==='tasks') pageContent = renderTasks();
+  else if (page==='formularios') pageContent = renderFormularios();
+  else if (page==='projects') pageContent = renderProjects();
+  else if (page==='advisors') pageContent = renderAdvisors();
+  else if (page==='reservas') pageContent = renderVentas('reserva');
+  else if (page==='escrituras') pageContent = renderVentas('escritura');
+  else if (page==='metricas') pageContent = renderMetricas();
+  else if (page==='informes') pageContent = renderInformes();
+  else if (page==='ai') pageContent = renderAI();
+
+  return `<div class="app">
+    <div class="sidebar">
+      <div class="sidebar-brand"><div class="logo-row"><div class="logo-icon">🌿</div><div><div class="brand">Energy Bless</div><div class="sub">División Parcelas</div></div></div></div>
+      <div class="sidebar-user"><div class="avatar">${ini}</div><div class="name">${escHtml(user.name)}</div><div class="role">${escHtml(user.role)}</div></div>
+      <div class="sidebar-nav">${navHtml}</div>
+      <div class="sidebar-footer">
+        <div class="sidebar-status">Conectado · Supabase</div>
+        <button class="btn btn-sm btn-full" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.12)" onclick="logout()">Cerrar sesión</button>
+      </div>
+    </div>
+    <div class="main">
+      <div class="topbar">
+        <div class="topbar-title">${PAGE_TITLES[page]||page}</div>
+        <div class="topbar-right">
+          ${nc>0?`<span class="badge badge-gold">${nc} nuevos</span>`:''}
+          <span class="badge badge-green" style="font-size:10px">🟢 Nube</span>
+          <span class="text-muted">${fmtDate(today())}</span>
+        </div>
+      </div>
+      <div class="page-content">${pageContent}</div>
+    </div>
+  </div>`;
+}
+
+function bindAdminApp() {
+  // bindings específicos por página se hacen en cada render
+  const page = STATE.page;
+  if (page==='dashboard') bindDash();
+  else if (page==='leads') bindLeads();
+  else if (page==='import') bindImport();
+  else if (page==='tasks') bindTasks();
+  else if (page==='formularios') bindFormularios();
+  else if (page==='projects') bindProjects();
+  else if (page==='advisors') bindAdvisors();
+  else if (page==='reservas' || page==='escrituras') bindVentas();
+  else if (page==='metricas') {}
+  else if (page==='informes') bindInformes();
+  else if (page==='ai') bindAI();
+}
+
+function goPage(p) { STATE.page = p; render(); }
+function logout() { STATE.user = null; STATE.userType = null; STATE.page='dashboard'; render(); }
+
+// ===================== DASHBOARD =====================
+function renderDash() {
+  const {leads, tasks, advisors, reservas, escrituras} = STATE;
+  const nv=leads.filter(l=>l.status==='Nuevo').length;
+  const rv=leads.filter(l=>l.status==='Reservado').length;
+  const ct=leads.filter(l=>l.status==='Contactado').length;
+  const sg=leads.filter(l=>l.status==='Seguimiento').length;
+  const ds=leads.filter(l=>l.status==='Descartado').length;
+  const pt=tasks.filter(t=>t.status!=='Completada').length;
+  const dt=tasks.filter(t=>t.status==='Completada').length;
+  const cr=leads.length>0?Math.round(rv/leads.length*100):0;
+  const bp={};leads.forEach(l=>{bp[l.project]=(bp[l.project]||0)+1});
+  const pd=Object.entries(bp).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([l,v])=>({label:l.split(' ')[0],val:v}));
+  const ra = getRankingAsesores(reservas, escrituras).slice(0,5);
+  const ms = ra[0] ? ra[0].score : 1;
+  const rl=leads.slice(-5).reverse();
+  const rankHtml = ra.map((a,i)=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e2e8f0">
+      <span style="font-size:16px;min-width:24px">${medalOf(i)}</span>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px"><span class="fw6" style="font-size:13px">${escHtml(a.name)}</span><span class="badge badge-green">${a.score}</span></div>
+        <div class="prog-bar"><div class="prog-bar-fill" style="width:${Math.round(a.score/ms*100)}%"></div></div>
+      </div>
+    </div>`).join('');
+  const recHtml = rl.map(l=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #e2e8f0">
+      <div><div class="fw6" style="font-size:13px">${escHtml(l.name)}</div><div class="text-muted">${escHtml(l.project)} · ${l.date}</div></div>
+      <span class="badge ${SCOL[l.status]||'badge-gray'}">${l.status}</span>
+    </div>`).join('');
+
+  return `
+  <div class="stats-grid">
+    <div class="stat-card" onclick="goPage('leads')"><div class="stat-label">Total Leads</div><div class="stat-num">${leads.length}</div><div class="stat-change">↑ ${nv} sin contactar</div></div>
+    <div class="stat-card gold" onclick="goPage('metricas')"><div class="stat-label">Conversión</div><div class="stat-num">${cr}%</div><div class="stat-change" style="color:#d4a017">${rv} reservados</div></div>
+    <div class="stat-card info" onclick="goPage('informes')"><div class="stat-label">Ventas Junio</div><div class="stat-num" style="color:#1d4ed8">${reservas.filter(r=>r.mes==='Junio').length+escrituras.filter(e=>e.mes==='Junio').length}</div><div class="stat-change" style="color:#1d4ed8">${reservas.filter(r=>r.mes==='Junio').length} res + ${escrituras.filter(e=>e.mes==='Junio').length} esc</div></div>
+    <div class="stat-card warn" onclick="goPage('tasks')"><div class="stat-label">Tareas Pend.</div><div class="stat-num" style="color:#d97706">${pt}</div><div class="stat-change" style="color:#d97706">${dt} completadas</div></div>
+  </div>
+  <div class="grid2" style="margin-bottom:1rem">
+    <div class="card"><div class="card-header"><div class="card-title">Leads por Estado</div><button class="btn btn-outline btn-sm" onclick="goPage('metricas')">Ver métricas</button></div>
+      ${buildDonut([{label:'Nuevos',val:nv,color:'#1d4ed8'},{label:'Contactados',val:ct,color:'#1e3a8a'},{label:'Seguimiento',val:sg,color:'#d4a017'},{label:'Reservados',val:rv,color:'#3b82f6'},{label:'Descartados',val:ds,color:'#dc2626'}].filter(s=>s.val>0))}
+    </div>
+    <div class="card"><div class="card-header"><div class="card-title">Leads por Proyecto</div></div>${pd.length?buildBar(pd):'<div style="text-align:center;color:#475569;padding:1rem">Sin datos</div>'}</div>
+  </div>
+  <div class="grid2">
+    <div class="card"><div class="card-header"><div class="card-title">⚡ Leads Recientes</div><button class="btn btn-outline btn-sm" onclick="goPage('leads')">Ver todos</button></div>${recHtml||'<div class="text-muted" style="padding:1rem">Sin leads</div>'}</div>
+    <div class="card"><div class="card-header"><div class="card-title">🏆 Top Asesores</div><button class="btn btn-outline btn-sm" onclick="goPage('informes')">Ranking</button></div>${rankHtml||'<div class="text-muted" style="padding:1rem">Sin datos</div>'}</div>
+  </div>`;
+}
+function bindDash() {}
+
+// ===================== LEADS =====================
+let leadsFilter = {search:'',proj:'',status:'',adv:''};
+let leadsModal = null; // 'add'|'edit'|'bulk'
+let selectedLead = null;
+let bulkRows = [];
+
+function renderLeads() {
+  const {leads, projects, advisors} = STATE;
+  const filt = leads.filter(l => {
+    const s = leadsFilter.search.toLowerCase();
+    return (!s || l.name.toLowerCase().includes(s)||l.email.toLowerCase().includes(s)||l.phone.includes(s))
+      && (!leadsFilter.proj || l.project===leadsFilter.proj)
+      && (!leadsFilter.status || l.status===leadsFilter.status)
+      && (!leadsFilter.adv || l.advisorId===leadsFilter.adv);
+  });
+  const projOpts = projects.map(p=>`<option value="${escHtml(p)}" ${leadsFilter.proj===p?'selected':''}>${escHtml(p)}</option>`).join('');
+  const statOpts = SOPT.map(s=>`<option value="${s}" ${leadsFilter.status===s?'selected':''}>${s}</option>`).join('');
+  const advOpts = advisors.map(a=>`<option value="${a.id}" ${leadsFilter.adv===a.id?'selected':''}>${escHtml(a.name)}</option>`).join('');
+  const rows = filt.map(l => {
+    const adv = advisors.find(a=>a.id===l.advisorId);
+    return `<tr>
+      <td><div class="fw6">${escHtml(l.name)}</div><div class="text-muted">${escHtml(l.source)}</div></td>
+      <td><div class="text-sm">${escHtml(l.email)}</div><div class="text-muted">${escHtml(l.phone)}</div></td>
+      <td><span class="tag">${escHtml(l.project)}</span></td>
+      <td class="text-sm">${escHtml(l.budget)||'—'}</td>
+      <td><span class="badge ${SCOL[l.status]||'badge-gray'}">${l.status}</span></td>
+      <td class="text-sm">${adv?escHtml(adv.name):'<span style="color:#94a3b8">Sin asignar</span>'}</td>
+      <td class="text-muted">${l.date}</td>
+      <td><div class="action-btns"><button class="btn btn-outline btn-xs" onclick="openEditLead('${l.id}')">Ver</button><button class="btn btn-danger btn-xs" onclick="deleteLead('${l.id}')">✕</button></div></td>
+    </tr>`;
+  }).join('');
+
+  let modalHtml = '';
+  if (leadsModal === 'edit' && selectedLead) modalHtml = renderLeadModal(selectedLead);
+  else if (leadsModal === 'add') modalHtml = renderAddLeadModal();
+  else if (leadsModal === 'bulk') modalHtml = renderBulkModal();
+
+  return `<div class="card">
+    <div class="card-header">
+      <div class="flex" style="gap:6px;flex-wrap:wrap">
+        <input class="search" placeholder="🔍 Buscar..." value="${escHtml(leadsFilter.search)}" oninput="leadsFilter.search=this.value;reRenderLeads()" style="width:160px"/>
+        <select class="search" onchange="leadsFilter.proj=this.value;reRenderLeads()"><option value="">Todos los proyectos</option>${projOpts}</select>
+        <select class="search" onchange="leadsFilter.status=this.value;reRenderLeads()"><option value="">Todos los estados</option>${statOpts}</select>
+        <select class="search" onchange="leadsFilter.adv=this.value;reRenderLeads()"><option value="">Todos los asesores</option>${advOpts}</select>
+      </div>
+      <div class="flex">
+        <button class="btn btn-outline btn-sm" onclick="openBulkModal()">📋 Cargar leads del día</button>
+        <button class="btn btn-primary btn-sm" onclick="openAddLead()">+ Agregar</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto"><table><thead><tr><th>Nombre</th><th>Contacto</th><th>Proyecto</th><th>Presupuesto</th><th>Estado</th><th>Asesor</th><th>Fecha</th><th></th></tr></thead><tbody>
+    ${rows||'<tr><td colspan="8" style="text-align:center;color:#475569;padding:2rem">Sin resultados</td></tr>'}
+    </tbody></table></div>
+    <div class="text-muted mt1">${filt.length} de ${leads.length} leads</div>
+  </div>
+  ${modalHtml}`;
+}
+
+function reRenderLeads() {
+  document.querySelector('.page-content').innerHTML = renderLeads();
+  bindLeads();
+}
+
+function renderLeadModal(lead) {
+  const projOpts = STATE.projects.map(p=>`<option value="${escHtml(p)}" ${lead.project===p?'selected':''}>${escHtml(p)}</option>`).join('');
+  const statOpts = SOPT.map(s=>`<option value="${s}" ${lead.status===s?'selected':''}>${s}</option>`).join('');
+  const advOpts = STATE.advisors.map(a=>`<option value="${a.id}" ${lead.advisorId===a.id?'selected':''}>${escHtml(a.name)}</option>`).join('');
+  return `<div class="modal-bg" onclick="if(event.target===this)closeLeadModal()">
+    <div class="modal">
+      <div class="modal-title">📋 ${escHtml(lead.name)}</div>
+      <div class="grid2">
+        <div class="field"><label>Nombre</label><input class="fi" id="le-name" value="${escHtml(lead.name)}"/></div>
+        <div class="field"><label>Teléfono</label><input class="fi" id="le-phone" value="${escHtml(lead.phone)}"/></div>
+        <div class="field"><label>Email</label><input class="fi" id="le-email" value="${escHtml(lead.email)}"/></div>
+        <div class="field"><label>Presupuesto</label><input class="fi" id="le-budget" value="${escHtml(lead.budget||'')}"/></div>
+      </div>
+      <div class="field"><label>Motivación</label><input class="fi" id="le-motivation" value="${escHtml(lead.motivation||'')}"/></div>
+      <div class="grid2">
+        <div class="field"><label>Proyecto</label><select class="fi" id="le-project">${projOpts}</select></div>
+        <div class="field"><label>Estado</label><select class="fi" id="le-status">${statOpts}</select></div>
+      </div>
+      <div class="field"><label>Asesor</label><select class="fi" id="le-adv"><option value="">Sin asignar</option>${advOpts}</select></div>
+      <div class="field"><label>Notas</label><textarea class="fi" id="le-notes">${escHtml(lead.notes||'')}</textarea></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" onclick="closeLeadModal()">Cancelar</button>
+        <button class="btn btn-primary btn-sm" onclick="saveLeadEdit('${lead.id}')">Guardar</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderAddLeadModal() {
+  const projOpts = STATE.projects.map(p=>`<option value="${escHtml(p)}">${escHtml(p)}</option>`).join('');
+  return `<div class="modal-bg" onclick="if(event.target===this)closeLeadModal()">
+    <div class="modal">
+      <div class="modal-title">➕ Agregar Lead</div>
+      <div class="grid2">
+        <div class="field"><label>Nombre *</label><input class="fi" id="al-name"/></div>
+        <div class="field"><label>Teléfono</label><input class="fi" id="al-phone"/></div>
+        <div class="field"><label>Email</label><input class="fi" id="al-email"/></div>
+        <div class="field"><label>Presupuesto</label><input class="fi" id="al-budget"/></div>
+      </div>
+      <div class="field"><label>Motivación</label><input class="fi" id="al-mot"/></div>
+      <div class="field"><label>Proyecto</label><select class="fi" id="al-proj">${projOpts}</select></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" onclick="closeLeadModal()">Cancelar</button>
+        <button class="btn btn-primary btn-sm" onclick="saveAddLead()">Agregar</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderBulkModal() {
+  const projOpts = STATE.projects.map(p=>`<option value="${escHtml(p)}">${escHtml(p)}</option>`).join('');
+  const rowsHtml = bulkRows.map((r,i)=>`<tr>
+    <td><input style="width:140px;padding:5px 8px;border:1.5px solid #cbd5e1;border-radius:6px;font-size:12px;font-family:Outfit,sans-serif" value="${escHtml(r.name)}" oninput="bulkRows[${i}].name=this.value" placeholder="Nombre completo"/></td>
+    <td><input style="width:120px;padding:5px 8px;border:1.5px solid #cbd5e1;border-radius:6px;font-size:12px;font-family:Outfit,sans-serif" value="${escHtml(r.phone)}" oninput="bulkRows[${i}].phone=this.value" placeholder="+569..."/></td>
+    <td><input style="width:150px;padding:5px 8px;border:1.5px solid #cbd5e1;border-radius:6px;font-size:12px;font-family:Outfit,sans-serif" value="${escHtml(r.email)}" oninput="bulkRows[${i}].email=this.value" placeholder="correo@..."/></td>
+    <td><select style="padding:5px 8px;border:1.5px solid #cbd5e1;border-radius:6px;font-size:12px;font-family:Outfit,sans-serif" onchange="bulkRows[${i}].project=this.value">${projOpts}</select></td>
+    <td><input style="width:110px;padding:5px 8px;border:1.5px solid #cbd5e1;border-radius:6px;font-size:12px;font-family:Outfit,sans-serif" value="${escHtml(r.budget)}" oninput="bulkRows[${i}].budget=this.value" placeholder="$ millones"/></td>
+    <td><select style="padding:5px 8px;border:1.5px solid #cbd5e1;border-radius:6px;font-size:12px;font-family:Outfit,sans-serif" onchange="bulkRows[${i}].source=this.value"><option>Factor Digital</option><option>WhatsApp</option><option>Referido</option><option>Correo</option><option>Manual</option></select></td>
+    <td><button class="btn btn-danger btn-xs" onclick="removeBulkRow(${i})">✕</button></td>
+  </tr>`).join('');
+  const valid = bulkRows.filter(r=>r.name.trim()).length;
+  return `<div class="modal-bg" onclick="if(event.target===this)closeLeadModal()">
+    <div class="modal" style="max-width:780px">
+      <div class="modal-title">📋 Cargar Leads del Día</div>
+      <div class="info-box info-blue" style="margin-bottom:1rem;font-size:12px">Ingresa los leads que llegaron hoy. Puedes agregar varios a la vez.</div>
+      <div style="overflow-x:auto;margin-bottom:1rem">
+        <table style="font-size:12px"><thead><tr><th>Nombre *</th><th>Teléfono</th><th>Email</th><th>Proyecto</th><th>Presupuesto</th><th>Fuente</th><th></th></tr></thead>
+        <tbody>${rowsHtml}</tbody></table>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="addBulkRow()" style="margin-bottom:1rem">+ Agregar fila</button>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" onclick="closeLeadModal()">Cancelar</button>
+        <button class="btn btn-primary btn-sm" onclick="saveBulk()">✅ Guardar ${valid} lead(s)</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function bindLeads() {}
+function openEditLead(id) { selectedLead = {...STATE.leads.find(l=>l.id===id)}; leadsModal='edit'; reRenderLeads(); }
+function openAddLead() { leadsModal='add'; reRenderLeads(); }
+function openBulkModal() { bulkRows=[{name:'',phone:'',email:'',project:STATE.projects[0]||'',budget:'',source:'Factor Digital'}]; leadsModal='bulk'; reRenderLeads(); }
+function closeLeadModal() { leadsModal=null; selectedLead=null; reRenderLeads(); }
+function addBulkRow() { bulkRows.push({name:'',phone:'',email:'',project:STATE.projects[0]||'',budget:'',source:'Factor Digital'}); reRenderLeads(); }
+function removeBulkRow(i) { bulkRows.splice(i,1); reRenderLeads(); }
+
+async function saveLeadEdit(id) {
+  const updated = {
+    ...STATE.leads.find(l=>l.id===id),
+    name: document.getElementById('le-name').value,
+    phone: document.getElementById('le-phone').value,
+    email: document.getElementById('le-email').value,
+    budget: document.getElementById('le-budget').value,
+    motivation: document.getElementById('le-motivation').value,
+    project: document.getElementById('le-project').value,
+    status: document.getElementById('le-status').value,
+    advisorId: document.getElementById('le-adv').value || null,
+    notes: document.getElementById('le-notes').value
+  };
+  STATE.leads = STATE.leads.map(l=>l.id===id?updated:l);
+  await sbSet('eb_leads', STATE.leads);
+  closeLeadModal();
+}
+
+async function saveAddLead() {
+  const name = document.getElementById('al-name').value.trim();
+  if (!name) { alert('El nombre es obligatorio'); return; }
+  const nl = {
+    id: uid(), name,
+    phone: document.getElementById('al-phone').value,
+    email: document.getElementById('al-email').value,
+    budget: document.getElementById('al-budget').value,
+    motivation: document.getElementById('al-mot').value,
+    project: document.getElementById('al-proj').value,
+    status:'Nuevo', source:'Manual', date:today(), advisorId:null, notes:''
+  };
+  STATE.leads = [...STATE.leads, nl];
+  await sbSet('eb_leads', STATE.leads);
+  closeLeadModal();
+}
+
+async function saveBulk() {
+  const valid = bulkRows.filter(r=>r.name.trim());
+  if (!valid.length) { alert('Al menos un nombre'); return; }
+  const newLeads = valid.map(r=>({...r, id:uid(), date:today(), status:'Nuevo', advisorId:null, notes:'', motivation:''}));
+  STATE.leads = [...STATE.leads, ...newLeads];
+  await sbSet('eb_leads', STATE.leads);
+  closeLeadModal();
+}
+
+async function deleteLead(id) {
+  if (!confirm('¿Eliminar este lead?')) return;
+  STATE.leads = STATE.leads.filter(l=>l.id!==id);
+  await sbSet('eb_leads', STATE.leads);
+  reRenderLeads();
+}
+
+// ===================== IMPORTAR =====================
+let importState = {text:'', extracted:null, added:false, err:'', loading:false};
+
+function renderImport() {
+  const {text, extracted, added, err, loading} = importState;
+  let extractedHtml = '';
+  if (extracted) {
+    const projOpts = STATE.projects.map(p=>`<option value="${escHtml(p)}" ${extracted.project===p?'selected':''}>${escHtml(p)}</option>`).join('');
+    extractedHtml = `<div class="card" style="border:2px solid #3b82f6">
+      <div class="card-title" style="margin-bottom:1rem">✅ Datos extraídos — revisa y edita</div>
+      <div class="grid2">
+        <div class="field"><label>Nombre</label><input class="fi" id="ep-name" value="${escHtml(extracted.name||'')}"/></div>
+        <div class="field"><label>Teléfono</label><input class="fi" id="ep-phone" value="${escHtml(extracted.phone||'')}"/></div>
+        <div class="field"><label>Email</label><input class="fi" id="ep-email" value="${escHtml(extracted.email||'')}"/></div>
+        <div class="field"><label>Presupuesto</label><input class="fi" id="ep-budget" value="${escHtml(extracted.budget||'')}"/></div>
+      </div>
+      <div class="field"><label>Motivación</label><input class="fi" id="ep-mot" value="${escHtml(extracted.motivation||'')}"/></div>
+      <div class="field"><label>Proyecto</label><select class="fi" id="ep-proj">${projOpts}</select></div>
+      ${!added
+        ? `<button class="btn btn-primary mt1" onclick="confirmImport()">➕ Confirmar y agregar al CRM</button>`
+        : `<div class="info-box info-green mt1">✅ <strong>${escHtml(extracted.name)}</strong> agregado y ${extracted._adv ? `asignado automáticamente a <strong>${escHtml(extracted._adv)}</strong> con tarea de contacto creada.` : 'guardado (no hay asesores cargados para asignar).'}</div>`
+      }
+    </div>`;
+  }
+  return `<div class="card">
+    <div class="card-header"><div><div class="card-title">📧 Importar Lead desde Correo</div><div class="card-subtitle">Copia el correo de Factor Digital y la IA extrae los datos</div></div></div>
+    <div class="import-box">
+      <div style="font-size:13px;color:#475569;font-weight:600">📋 Pega aquí el texto del correo</div>
+      <textarea id="import-text" placeholder="Pega aquí el texto completo del correo de Factor Digital...">${escHtml(text)}</textarea>
+    </div>
+    ${err ? `<div class="error-msg" style="margin-bottom:.8rem">${escHtml(err)}</div>` : ''}
+    <button class="btn btn-gold" id="parse-btn" onclick="parseEmail()" ${loading?'disabled':''}>
+      ${loading ? '🔄 Procesando...' : '🤖 Extraer datos con IA'}
+    </button>
+  </div>
+  ${extractedHtml}`;
+}
+
+function bindImport() {
+  const ta = document.getElementById('import-text');
+  if (ta) ta.addEventListener('input', () => { importState.text = ta.value; });
+}
+
+// Extracción LOCAL: instantánea, sin internet y sin costo de créditos.
+// Lee el texto pegado del correo y detecta los datos del lead automáticamente.
+async function parseEmail() {
+  importState.text = document.getElementById('import-text').value;
+  const txt = importState.text.trim();
+  if (!txt) { importState.err='Pega el texto del correo primero'; reRenderImport(); return; }
+  importState.err=''; importState.extracted=null; importState.added=false;
+
+  // Email
+  const email = (txt.match(/[\w.+-]+@[\w-]+\.[\w.-]+/) || [''])[0];
+
+  // Teléfono chileno (+56 9 xxxx xxxx, 9xxxxxxxx, etc.)
+  let phone = '';
+  const mPhone = txt.match(/(\+?56)?\s*9[\s.\-]?\d{4}[\s.\-]?\d{4}/);
+  if (mPhone) phone = mPhone[0].replace(/[\s.\-]/g,'');
+
+  // Nombre: busca "Nombre:" o toma la primera línea corta sin @ ni números
+  let name = '';
+  const mName = txt.match(/nombre[:\s]+([^\n\r]+)/i);
+  if (mName) name = mName[1].trim();
+  else {
+    const linea = txt.split(/\n/).map(l=>l.trim())
+      .find(l => l && !l.includes('@') && !/\d{4}/.test(l) && l.length < 40);
+    if (linea) name = linea;
+  }
+
+  // Presupuesto
+  let budget = '';
+  const mBud = txt.match(/(presupuesto|budget|invertir|monto)[:\s]*([^\n\r]+)/i);
+  if (mBud) budget = mBud[2].trim();
+  else { const mUf = txt.match(/(\$[\d.,]+|\d+\s*(millones|uf|mm))/i); if (mUf) budget = mUf[0]; }
+
+  // Motivación
+  let motivation = '';
+  const mMot = txt.match(/(motivaci[oó]n|interesad|busca|raz[oó]n)[:\s]*([^\n\r]+)/i);
+  if (mMot) motivation = (mMot[2]||'').trim();
+
+  // Proyecto: coincide con los proyectos ya cargados
+  const project = STATE.projects.find(p => txt.toLowerCase().includes((p||'').toLowerCase()))
+                  || (STATE.projects[0] || '');
+
+  importState.extracted = {name, email, phone, budget, motivation, project};
+  reRenderImport();
+}
+
+async function confirmImport() {
+  const ep = {
+    name: document.getElementById('ep-name').value,
+    phone: document.getElementById('ep-phone').value,
+    email: document.getElementById('ep-email').value,
+    budget: document.getElementById('ep-budget').value,
+    motivation: document.getElementById('ep-mot').value,
+    project: document.getElementById('ep-proj').value
+  };
+
+  // ---- ASIGNACIÓN AUTOMÁTICA ----
+  // Reparte el lead al asesor con MENOS tareas activas (carga balanceada).
+  let advisorId = null, advName = '';
+  if (STATE.advisors && STATE.advisors.length) {
+    const carga = STATE.advisors.map(a => ({
+      a, n: STATE.tasks.filter(t => t.advisorId === a.id && t.status !== 'Completada').length
+    }));
+    carga.sort((x,y) => x.n - y.n);
+    advisorId = carga[0].a.id;
+    advName = carga[0].a.name;
+  }
+
+  const lead = {...ep, id:uid(), status:'Nuevo', source:'Factor Digital', date:today(), advisorId, notes:''};
+  STATE.leads = [...STATE.leads, lead];
+  await sbSet('eb_leads', STATE.leads);
+
+  // ---- TAREA AUTOMÁTICA ----
+  // El asesor recibe al instante el contacto a trabajar, con vencimiento a 24 h.
+  if (advisorId) {
+    const venc = new Date(Date.now() + 24*60*60*1000).toISOString().split('T')[0];
+    const tarea = {
+      id: uid(),
+      title: 'Contactar nuevo lead: ' + (ep.name || 'sin nombre'),
+      description: `📞 ${ep.phone||'—'}  ·  ✉️ ${ep.email||'—'}  ·  💰 ${ep.budget||'—'}\nMotivación: ${ep.motivation||'—'}`,
+      advisorId, project: ep.project, dueDate: venc, status: 'Pendiente', date: today()
+    };
+    STATE.tasks = [...STATE.tasks, tarea];
+    await sbSet('eb_tasks', STATE.tasks);
+  }
+
+  importState.extracted = {...ep, _adv: advName};
+  importState.added = true;
+  reRenderImport();
+}
+
+function reRenderImport() {
+  document.querySelector('.page-content').innerHTML = renderImport();
+  bindImport();
+}
+
+// ===================== TAREAS =====================
+let tasksFilter = {adv:'', status:''};
+let showAddTask = false;
+
+function renderTasks() {
+  const {tasks, advisors, projects} = STATE;
+  const filt = tasks.filter(t => (!tasksFilter.adv || t.advisorId===tasksFilter.adv) && (!tasksFilter.status || (tasksFilter.status==='Completada'?t.status==='Completada':t.status!=='Completada')));
+  const advOpts = advisors.map(a=>`<option value="${a.id}" ${tasksFilter.adv===a.id?'selected':''}>${escHtml(a.name)}</option>`).join('');
+  const rows = filt.map(t => {
+    const adv = advisors.find(a=>a.id===t.advisorId);
+    return `<tr>
+      <td><div class="fw6">${escHtml(t.title)}</div><div class="text-muted">${escHtml((t.description||'').substring(0,50))}${t.description&&t.description.length>50?'...':''}</div></td>
+      <td class="fw6">${adv?escHtml(adv.name):'—'}</td>
+      <td><span class="tag">${escHtml(t.project||'')}</span></td>
+      <td class="text-muted">${t.dueDate||'—'}</td>
+      <td><span class="badge ${t.status==='Completada'?'badge-green':'badge-gold'}">${t.status||'Pendiente'}</span></td>
+      <td style="max-width:200px">${t.report?`<div class="text-sm">${escHtml(t.report.substring(0,70))}</div>${t.nextContact?`<div class="text-muted">📅 ${escHtml(t.nextContact)}</div>`:''}`:'<span style="color:#94a3b8;font-size:12px">Esperando...</span>'}</td>
+      <td><button class="btn btn-danger btn-xs" onclick="deleteTask('${t.id}')">✕</button></td>
+    </tr>`;
+  }).join('');
+
+  let addModal = '';
+  if (showAddTask) {
+    const projOpts = projects.map(p=>`<option value="${escHtml(p)}">${escHtml(p)}</option>`).join('');
+    const advOptsFull = advisors.map(a=>`<option value="${a.id}">${escHtml(a.name)} (${a.code})</option>`).join('');
+    addModal = `<div class="modal-bg" onclick="if(event.target===this)closeAddTask()">
+      <div class="modal">
+        <div class="modal-title">✅ Asignar Tarea</div>
+        <div class="field"><label>Título *</label><input class="fi" id="at-title" placeholder="Ej: Llamar y agendar visita"/></div>
+        <div class="field"><label>Instrucciones</label><textarea class="fi" id="at-desc" placeholder="Qué debe hacer el asesor..."></textarea></div>
+        <div class="grid2">
+          <div class="field"><label>Asesor *</label><select class="fi" id="at-adv"><option value="">Seleccionar...</option>${advOptsFull}</select></div>
+          <div class="field"><label>Proyecto</label><select class="fi" id="at-proj">${projOpts}</select></div>
+        </div>
+        <div class="field"><label>Fecha límite</label><input type="date" class="fi" id="at-date"/></div>
+        <div id="at-err" class="err" style="display:none"></div>
+        <div class="modal-footer">
+          <button class="btn btn-outline btn-sm" onclick="closeAddTask()">Cancelar</button>
+          <button class="btn btn-primary btn-sm" onclick="saveTask()">Asignar</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  return `<div class="card">
+    <div class="card-header">
+      <div class="flex">
+        <select class="search" onchange="tasksFilter.adv=this.value;reRenderTasks()"><option value="">Todos los asesores</option>${advOpts}</select>
+        <select class="search" onchange="tasksFilter.status=this.value;reRenderTasks()">
+          <option value="" ${!tasksFilter.status?'selected':''}>Todos</option>
+          <option value="Pendiente" ${tasksFilter.status==='Pendiente'?'selected':''}>Pendientes</option>
+          <option value="Completada" ${tasksFilter.status==='Completada'?'selected':''}>Completadas</option>
+        </select>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="openAddTask()">+ Asignar tarea</button>
+    </div>
+    <div style="overflow-x:auto"><table><thead><tr><th>Tarea</th><th>Asesor</th><th>Proyecto</th><th>Vence</th><th>Estado</th><th>Reporte</th><th></th></tr></thead><tbody>
+    ${rows||'<tr><td colspan="7" style="text-align:center;color:#475569;padding:2rem">Sin tareas</td></tr>'}
+    </tbody></table></div>
+  </div>
+  ${addModal}`;
+}
+
+function bindTasks() {}
+function reRenderTasks() { document.querySelector('.page-content').innerHTML = renderTasks(); }
+function openAddTask() { showAddTask=true; reRenderTasks(); }
+function closeAddTask() { showAddTask=false; reRenderTasks(); }
+
+async function saveTask() {
+  const title = document.getElementById('at-title').value.trim();
+  const advisorId = document.getElementById('at-adv').value;
+  const err = document.getElementById('at-err');
+  if (!title) { err.textContent='Título requerido'; err.style.display='block'; return; }
+  if (!advisorId) { err.textContent='Selecciona un asesor'; err.style.display='block'; return; }
+  const nt = {id:uid(), title, description:document.getElementById('at-desc').value, advisorId, project:document.getElementById('at-proj').value, dueDate:document.getElementById('at-date').value, status:'Pendiente', date:today()};
+  STATE.tasks = [...STATE.tasks, nt];
+  await sbSet('eb_tasks', STATE.tasks);
+  showAddTask = false;
+  reRenderTasks();
+}
+
+async function deleteTask(id) {
+  if (!confirm('¿Eliminar esta tarea?')) return;
+  STATE.tasks = STATE.tasks.filter(t=>t.id!==id);
+  await sbSet('eb_tasks', STATE.tasks);
+  reRenderTasks();
+}
+
+// ===================== FORMULARIOS =====================
+let formModal = null;
+const FORMS_DATA = [
+  {id:'caone',icon:'🌲',title:'Praderas de Caone',desc:'Formulario de reserva para Praderas de Caone',inst:`FORMULARIO DE RESERVA — PRADERAS DE CAONE\n\nDatos requeridos:\n• Nombre completo (según cédula)\n• RUT\n• Teléfono\n• Email\n• Número de parcela\n• Forma de pago\n• Monto de pie (si aplica)\n\nDocumentos:\n• Fotocopia cédula (ambos lados)\n• Comprobante de pago del pie\n\nEnviar a: ventas@energybless.cl\n\n⚠️ Reserva NO confirmada hasta recibir confirmación escrita de Gerencia.`},
+  {id:'lolol',icon:'🏔️',title:'Terrazas de Lolol',desc:'Formulario de reserva para Terrazas de Lolol',inst:`FORMULARIO DE RESERVA — TERRAZAS DE LOLOL\n\nDatos requeridos:\n• Nombre completo\n• RUT\n• Teléfono\n• Email\n• Número de parcela\n• Forma de pago\n\nEnviar a: ventas@energybless.cl`},
+  {id:'sn',icon:'🌾',title:'Praderas de San Nicolás',desc:'Formulario de reserva para Praderas de San Nicolás',inst:`FORMULARIO DE RESERVA — PRADERAS DE SAN NICOLÁS\n\nDatos requeridos:\n• Nombre completo\n• RUT\n• Teléfono\n• Email\n• Número de parcela\n• Forma de pago\n\nEnviar a: ventas@energybless.cl`},
+  {id:'costa',icon:'🌊',title:'Costa Dorada (Llico)',desc:'Formulario de reserva para Costa Dorada',inst:`FORMULARIO DE RESERVA — COSTA DORADA (LLICO)\n\nDatos requeridos:\n• Nombre completo\n• RUT\n• Teléfono\n• Email\n• Número de parcela\n• Forma de pago\n\nEnviar a: ventas@energybless.cl\nAsunto: RESERVA COSTA DORADA`},
+  {id:'pared',icon:'🏕️',title:'Refugio Paredones',desc:'Formulario de reserva para Refugio Paredones',inst:`FORMULARIO DE RESERVA — REFUGIO PAREDONES\n\nDatos requeridos:\n• Nombre completo\n• RUT\n• Teléfono\n• Email\n• Número de parcela\n• Forma de pago\n\nEnviar a: ventas@energybless.cl`},
+  {id:'gral',icon:'📄',title:'Formulario General',desc:'Para Valle Verde, Chicalindo, Alto Romeros y otros',inst:`FORMULARIO DE RESERVA GENERAL\n\nPara: Valle Verde, Chicalindo, Alto Romeros y otros proyectos.\n\nDatos requeridos:\n• Nombre completo\n• RUT\n• Teléfono\n• Email\n• Proyecto y número de parcela\n• Forma de pago\n\nEnviar a: ventas@energybless.cl\nIndicar el proyecto en el asunto.`}
+];
+
+function renderFormularios() {
+  const cards = FORMS_DATA.map(f=>`
+    <div class="formulario-card" onclick="openFormModal('${f.id}')">
+      <span class="fc-icon">${f.icon}</span>
+      <div class="fc-title">${escHtml(f.title)}</div>
+      <div class="fc-desc">${escHtml(f.desc)}</div>
+      <span class="fc-badge">Ver formulario →</span>
+    </div>`).join('');
+
+  let modal = '';
+  if (formModal) {
+    const f = FORMS_DATA.find(x=>x.id===formModal);
+    if (f) modal = `<div class="modal-bg" onclick="if(event.target===this)closeFormModal()">
+      <div class="modal" style="max-width:560px">
+        <div class="modal-title">${f.icon} ${escHtml(f.title)}</div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;padding:1.2rem;margin-bottom:1rem">
+          <pre style="font-family:Outfit,sans-serif;font-size:13px;line-height:1.7;white-space:pre-wrap">${escHtml(f.inst)}</pre>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline btn-sm" onclick="closeFormModal()">Cerrar</button>
+          <button class="btn btn-primary btn-sm" onclick="copyFormInst('${f.id}')">📋 Copiar instrucciones</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  return `
+  <div class="card" style="margin-bottom:1.2rem">
+    <div class="card-header"><div><div class="card-title">📄 Formularios de Reserva</div><div class="card-subtitle">Protocolos de reserva por proyecto</div></div></div>
+    <div class="info-box info-gold">💡 <strong>Integración Meta pendiente:</strong> Cuando tengas acceso a Meta Lead Ads, los formularios se conectarán aquí automáticamente. Por ahora usa <strong>"Importar desde Correo"</strong> para los leads de Factor Digital.</div>
+  </div>
+  <div class="formularios-grid">${cards}</div>
+  <div class="card" style="background:linear-gradient(135deg,#0f172a,#1a4530);color:#fff">
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div style="font-size:32px">🔗</div>
+      <div style="flex:1"><div style="font-family:Cormorant Garamond,serif;font-size:17px;font-weight:700;margin-bottom:4px">Integración con Meta Lead Ads</div><div style="font-size:13px;color:#bfdbfe;line-height:1.5">Cuando tengas acceso al administrador de Meta, los leads de Facebook e Instagram llegarán directo al CRM en tiempo real.</div></div>
+      <span style="background:rgba(200,168,80,0.2);border:1px solid rgba(200,168,80,0.4);color:#eab308;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600">⏳ Pendiente acceso</span>
+    </div>
+  </div>
+  ${modal}`;
+}
+
+function bindFormularios() {}
+function openFormModal(id) { formModal=id; reRenderPage(); }
+function closeFormModal() { formModal=null; reRenderPage(); }
+function copyFormInst(id) {
+  const f = FORMS_DATA.find(x=>x.id===id);
+  if (f && navigator.clipboard) navigator.clipboard.writeText(f.inst).then(()=>alert('✅ Instrucciones copiadas'));
+}
+function reRenderPage() { document.querySelector('.page-content').innerHTML = renderCurrentPage(); bindCurrentPage(); }
+function renderCurrentPage() {
+  const p = STATE.page;
+  if (p==='formularios') return renderFormularios();
+  if (p==='projects') return renderProjects();
+  if (p==='advisors') return renderAdvisors();
+  return '';
+}
+function bindCurrentPage() {}
+
+// ===================== PROYECTOS =====================
+let projErr = '';
+function renderProjects() {
+  const {projects} = STATE;
+  const items = projects.map((p,i)=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px">
+      <div class="flex"><span class="text-muted" style="min-width:22px">#${i+1}</span><span class="fw6">${escHtml(p)}</span></div>
+      <button class="btn btn-danger btn-xs" onclick="deleteProject('${escHtml(p)}')">Eliminar</button>
+    </div>`).join('');
+  return `<div class="card">
+    <div class="card-title" style="margin-bottom:1rem">🏡 Proyectos</div>
+    <div style="display:flex;gap:.5rem;margin-bottom:.5rem">
+      <input class="search" style="flex:1" id="np-input" placeholder="Nuevo proyecto..." onkeydown="if(event.key==='Enter')addProject()"/>
+      <button class="btn btn-primary" onclick="addProject()">+ Agregar</button>
+    </div>
+    ${projErr?`<div class="err">${escHtml(projErr)}</div>`:''}
+    <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.5rem">${items}</div>
+  </div>`;
+}
+function bindProjects() {}
+
+async function addProject() {
+  const val = document.getElementById('np-input').value.trim();
+  if (!val) { projErr='Escribe el nombre'; reRenderPage(); return; }
+  if (STATE.projects.includes(val)) { projErr='Ya existe'; reRenderPage(); return; }
+  STATE.projects = [...STATE.projects, val];
+  await sbSet('eb_projects', STATE.projects.map((p,i)=>({id:'proj'+i,data:p})));
+  projErr='';
+  reRenderPage();
+}
+
+async function deleteProject(name) {
+  if (!confirm(`¿Eliminar "${name}"?`)) return;
+  STATE.projects = STATE.projects.filter(p=>p!==name);
+  await sbSet('eb_projects', STATE.projects.map((p,i)=>({id:'proj'+i,data:p})));
+  reRenderPage();
+}
+
+// ===================== ASESORES =====================
+let showAddAdvisor = false;
+let editPasswordId = null;
+let advErr = '';
+
+function renderAdvisors() {
+  const {advisors, tasks} = STATE;
+  let addForm = '';
+  if (showAddAdvisor) {
+    addForm = `<div style="padding:1.1rem;background:#eff6ff;border-radius:10px;margin-bottom:1rem;border:1px solid #bfdbfe">
+      <div class="fw7" style="margin-bottom:.8rem">Nuevo asesor</div>
+      <div class="grid2">
+        <div class="field"><label>Nombre *</label><input class="fi" id="na-name"/></div>
+        <div class="field"><label>Código *</label><input class="fi" id="na-code" placeholder="FC, AR..."/></div>
+        <div class="field"><label>Contraseña *</label><input class="fi" id="na-pass"/></div>
+      </div>
+      ${advErr?`<div class="err">${escHtml(advErr)}</div>`:''}
+      <div class="flex"><button class="btn btn-primary btn-sm" onclick="saveNewAdvisor()">Guardar</button><button class="btn btn-outline btn-sm" onclick="closeAddAdvisor()">Cancelar</button></div>
+    </div>`;
+  }
+  let editPassForm = '';
+  if (editPasswordId) {
+    const adv = advisors.find(a=>a.id===editPasswordId);
+    editPassForm = `<div style="padding:1rem;background:#fef9c3;border-radius:10px;margin-bottom:1rem;border:1px solid #f5d090">
+      <div class="fw6" style="margin-bottom:.8rem">🔐 Cambiar contraseña — ${escHtml(adv?adv.name:'')}</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <input style="flex:1;padding:8px 12px;border:1.5px solid #cbd5e1;border-radius:8px;font-family:Outfit,sans-serif;font-size:13px" type="password" placeholder="Nueva contraseña" id="ep-newpass"/>
+        <button class="btn btn-primary btn-sm" onclick="saveNewPassword()">Guardar</button>
+        <button class="btn btn-outline btn-sm" onclick="cancelEditPass()">Cancelar</button>
+      </div>
+    </div>`;
+  }
+  const rows = advisors.map(a => {
+    const mt = tasks.filter(t=>t.advisorId===a.id);
+    const dn = mt.filter(t=>t.status==='Completada').length;
+    const pc = mt.length>0 ? Math.round(dn/mt.length*100) : 0;
+    return `<tr>
+      <td class="fw6">${escHtml(a.name)}</td>
+      <td><span class="badge badge-green">${escHtml(a.code)}</span></td>
+      <td><code style="background:#f8fafc;padding:2px 9px;border-radius:6px;font-size:12px;border:1px solid #e2e8f0">${escHtml(a.pass)}</code></td>
+      <td>${mt.length}</td><td>${dn}</td>
+      <td><span class="badge ${pc>=70?'badge-green':pc>=40?'badge-gold':'badge-red'}">${pc}%</span></td>
+      <td><div style="display:flex;gap:5px">
+        <button class="btn btn-xs" style="background:#1e3a8a;color:#fff" onclick="openEditPass('${a.id}')">🔐</button>
+        <button class="btn btn-danger btn-xs" onclick="deleteAdvisor('${a.id}')">Eliminar</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  return `<div class="card">
+    <div class="card-header"><div class="card-title">🧑‍💼 Equipo (${advisors.length})</div><button class="btn btn-primary btn-sm" onclick="openAddAdvisor()">+ Agregar</button></div>
+    ${addForm}${editPassForm}
+    <div style="overflow-x:auto"><table><thead><tr><th>Nombre</th><th>Código</th><th>Contraseña</th><th>Tareas</th><th>Completadas</th><th>Tasa</th><th></th></tr></thead><tbody>
+    ${rows}
+    </tbody></table></div>
+    <div class="info-box info-green mt2">💡 Los asesores acceden con su código y contraseña. Solo ven sus tareas asignadas.</div>
+  </div>`;
+}
+
+function bindAdvisors() {}
+function openAddAdvisor() { showAddAdvisor=true; advErr=''; reRenderPage(); }
+function closeAddAdvisor() { showAddAdvisor=false; advErr=''; reRenderPage(); }
+function openEditPass(id) { editPasswordId=id; reRenderPage(); }
+function cancelEditPass() { editPasswordId=null; reRenderPage(); }
+
+async function saveNewAdvisor() {
+  const name=document.getElementById('na-name').value.trim();
+  const code=document.getElementById('na-code').value.trim().toUpperCase();
+  const pass=document.getElementById('na-pass').value.trim();
+  if (!name||!code||!pass) { advErr='Todos los campos requeridos'; reRenderPage(); return; }
+  if (STATE.advisors.find(a=>a.code.toUpperCase()===code)) { advErr='Código ya existe'; reRenderPage(); return; }
+  STATE.advisors = [...STATE.advisors, {id:uid(),name,code,pass}];
+  await sbSet('eb_advisors', STATE.advisors);
+  showAddAdvisor=false; advErr=''; reRenderPage();
+}
+
+async function saveNewPassword() {
+  const newpass = document.getElementById('ep-newpass').value;
+  if (!newpass || newpass.length<6) { alert('Mínimo 6 caracteres'); return; }
+  STATE.advisors = STATE.advisors.map(a=>a.id===editPasswordId?{...a,pass:newpass}:a);
+  await sbSet('eb_advisors', STATE.advisors);
+  editPasswordId=null; alert('✅ Contraseña actualizada'); reRenderPage();
+}
+
+async function deleteAdvisor(id) {
+  if (!confirm('¿Eliminar este asesor?')) return;
+  STATE.advisors = STATE.advisors.filter(a=>a.id!==id);
+  await sbSet('eb_advisors', STATE.advisors);
+  reRenderPage();
+}
+
+// ===================== VENTAS (RESERVAS / ESCRITURAS) =====================
+let ventasState = {showAdd:false, editId:null, fm:'Todos', fp:'', err:'', form:{mes:'',proyecto:'',parcela:'',asesores:'',lead:'',fecha:today()}};
+
+function renderVentas(tipo) {
+  const tit = tipo==='reserva'?'Reservas':'Escrituras';
+  const emo = tipo==='reserva'?'📋':'📝';
+  const ventas = tipo==='reserva' ? STATE.reservas : STATE.escrituras;
+  const {showAdd, editId, fm, fp, err, form} = ventasState;
+  const meses = ['Todos','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const filt = ventas.filter(v=>(fm==='Todos'||v.mes===fm)&&(!fp||v.proyecto.toLowerCase().includes(fp.toLowerCase())));
+  const byP = filt.reduce((a,v)=>{if(!a[v.proyecto])a[v.proyecto]=[];a[v.proyecto].push(v);return a;},{});
+
+  const projOpts = STATE.projects.map(p=>`<option value="${escHtml(p)}" ${form.proyecto===p?'selected':''}>${escHtml(p)}</option>`).join('');
+  const mesOpts = meses.map(m=>`<option value="${m}" ${m===fm?'selected':''}>${m}</option>`).join('');
+  const mesFormOpts = meses.slice(1).map(m=>`<option value="${m}" ${form.mes===m?'selected':''}>${m}</option>`).join('');
+
+  let addForm = '';
+  if (showAdd) {
+    addForm = `<div class="card" style="margin-bottom:1rem;border:2px solid #3b82f6">
+      <div class="card-title" style="margin-bottom:1rem">${editId?'Editar':'Nuevo'} ${tipo}</div>
+      <div class="grid2">
+        <div class="field"><label>Mes *</label><select class="fi" id="vf-mes">${mesFormOpts}</select></div>
+        <div class="field"><label>Fecha</label><input type="date" class="fi" id="vf-fecha" value="${form.fecha}"/></div>
+        <div class="field"><label>Proyecto *</label><select class="fi" id="vf-proj"><option value="">Seleccionar</option>${projOpts}</select></div>
+        <div class="field"><label>Parcela *</label><input class="fi" id="vf-parcela" value="${escHtml(form.parcela)}" placeholder="Ej: Pc 23"/></div>
+        <div class="field"><label>Asesor(es) *</label><input class="fi" id="vf-asesores" value="${escHtml(form.asesores)}" placeholder="Ej: Franco Campos"/></div>
+        <div class="field"><label>Lead vinculado</label><input class="fi" id="vf-lead" value="${escHtml(form.lead)}" placeholder="Nombre cliente (opcional)"/></div>
+      </div>
+      ${err?`<div class="err">${escHtml(err)}</div>`:''}
+      <div class="flex">
+        <button class="btn btn-primary btn-sm" onclick="saveVenta('${tipo}')">Guardar</button>
+        <button class="btn btn-outline btn-sm" onclick="closeAddVenta()">Cancelar</button>
+      </div>
+    </div>`;
+  }
+
+  const proyectos = Object.entries(byP).map(([proj,items])=>`
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><div class="card-title" style="font-size:14px">🏡 ${escHtml(proj)} <span class="badge badge-green" style="margin-left:8px">${items.length}</span></div></div>
+      <table><thead><tr><th>Parcela</th><th>Asesor(es)</th><th>Lead</th><th>Mes</th><th>Fecha</th><th></th></tr></thead><tbody>
+      ${items.map(v=>`<tr>
+        <td><code style="background:#eff6ff;padding:2px 9px;border-radius:5px;font-size:12px">${escHtml(v.parcela)}</code></td>
+        <td class="fw6">${escHtml(v.asesores)}</td>
+        <td><span style="font-size:12px;color:#475569">${escHtml(v.lead)||'—'}</span></td>
+        <td><span class="badge badge-gold">${escHtml(v.mes)}</span></td>
+        <td class="text-muted text-sm">${v.fecha}</td>
+        <td><div class="flex">
+          <button class="btn btn-xs" style="background:#1e3a8a;color:#fff" onclick="editVenta('${tipo}','${v.id}')">✏️</button>
+          <button class="btn btn-danger btn-xs" onclick="deleteVenta('${tipo}','${v.id}')">✕</button>
+        </div></td>
+      </tr>`).join('')}
+      </tbody></table>
+    </div>`).join('');
+
+  return `<div class="card" style="margin-bottom:1rem">
+    <div class="card-header"><div class="card-title">${emo} ${tit}</div><button class="btn btn-primary btn-sm" onclick="openAddVenta()">+ Agregar ${tipo}</button></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1rem">
+      <div class="field" style="margin:0"><label>Mes</label><select onchange="ventasState.fm=this.value;reRenderVentas('${tipo}')">${mesOpts}</select></div>
+      <div class="field" style="margin:0;flex:1"><label>Proyecto</label><input value="${escHtml(fp)}" oninput="ventasState.fp=this.value;reRenderVentas('${tipo}')" placeholder="Buscar..."/></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem">
+      <div class="stat-card" style="padding:.8rem"><div class="stat-label">Total</div><div class="stat-num">${ventas.length}</div></div>
+      <div class="stat-card" style="padding:.8rem"><div class="stat-label">Filtrados</div><div class="stat-num">${filt.length}</div></div>
+      <div class="stat-card gold" style="padding:.8rem"><div class="stat-label">Proyectos</div><div class="stat-num">${Object.keys(byP).length}</div></div>
+    </div>
+  </div>
+  ${addForm}
+  ${!Object.keys(byP).length?`<div class="card" style="text-align:center;color:#475569;padding:2rem">No hay ${tit.toLowerCase()} registradas</div>`:''}
+  ${proyectos}`;
+}
+
+function bindVentas() {}
+function reRenderVentas(tipo) { document.querySelector('.page-content').innerHTML = renderVentas(tipo); }
+function openAddVenta() { ventasState.showAdd=true; ventasState.editId=null; ventasState.err=''; ventasState.form={mes:'',proyecto:'',parcela:'',asesores:'',lead:'',fecha:today()}; reRenderVentas(STATE.page); }
+function closeAddVenta() { ventasState.showAdd=false; ventasState.editId=null; ventasState.err=''; reRenderVentas(STATE.page); }
+
+function editVenta(tipo, id) {
+  const ventas = tipo==='reserva' ? STATE.reservas : STATE.escrituras;
+  const v = ventas.find(x=>x.id===id);
+  if (!v) return;
+  ventasState.form = {...v};
+  ventasState.editId = id;
+  ventasState.showAdd = true;
+  ventasState.err = '';
+  reRenderVentas(tipo);
+}
+
+async function saveVenta(tipo) {
+  const mes = document.getElementById('vf-mes').value;
+  const proyecto = document.getElementById('vf-proj').value;
+  const parcela = document.getElementById('vf-parcela').value.trim();
+  const asesores = document.getElementById('vf-asesores').value.trim();
+  if (!proyecto||!parcela||!asesores||!mes) { ventasState.err='Campos obligatorios faltantes'; reRenderVentas(tipo); return; }
+  const entry = {mes, proyecto, parcela, asesores, lead:document.getElementById('vf-lead').value, fecha:document.getElementById('vf-fecha').value, id:ventasState.editId||uid()};
+  if (tipo==='reserva') {
+    STATE.reservas = ventasState.editId ? STATE.reservas.map(v=>v.id===ventasState.editId?entry:v) : [...STATE.reservas, entry];
+    await sbSet('eb_reservas', STATE.reservas);
+  } else {
+    STATE.escrituras = ventasState.editId ? STATE.escrituras.map(v=>v.id===ventasState.editId?entry:v) : [...STATE.escrituras, entry];
+    await sbSet('eb_escrituras', STATE.escrituras);
+  }
+  ventasState.showAdd=false; ventasState.editId=null; ventasState.err='';
+  reRenderVentas(tipo);
+}
+
+async function deleteVenta(tipo, id) {
+  if (!confirm('¿Eliminar?')) return;
+  if (tipo==='reserva') { STATE.reservas=STATE.reservas.filter(v=>v.id!==id); await sbSet('eb_reservas',STATE.reservas); }
+  else { STATE.escrituras=STATE.escrituras.filter(v=>v.id!==id); await sbSet('eb_escrituras',STATE.escrituras); }
+  reRenderVentas(tipo);
+}
+
+// ===================== MÉTRICAS =====================
+let metFilter = 'Todos';
+function renderMetricas() {
+  const {leads, reservas, escrituras, advisors} = STATE;
+  const mf = metFilter;
+  const resF = mf==='Todos'?reservas:reservas.filter(r=>r.mes===mf);
+  const escF = mf==='Todos'?escrituras:escrituras.filter(e=>e.mes===mf);
+  const tot=leads.length, nv=leads.filter(l=>l.status==='Nuevo').length, ct=leads.filter(l=>l.status==='Contactado').length;
+  const sg=leads.filter(l=>l.status==='Seguimiento').length, va=leads.filter(l=>l.status==='Visita agendada').length;
+  const pe=leads.filter(l=>l.status==='Propuesta enviada').length, rv=leads.filter(l=>l.status==='Reservado').length;
+  const bp={}; leads.forEach(l=>{bp[l.project]=(bp[l.project]||0)+1;});
+  const pa = Object.entries(bp).sort((a,b)=>b[1]-a[1]);
+  const mp = pa[0]?pa[0][1]:1;
+  const vpm=['Enero','Febrero','Marzo','Abril','Mayo','Junio'].map(m=>({label:m.substring(0,3),val:reservas.filter(r=>r.mes===m).length+escrituras.filter(e=>e.mes===m).length}));
+  const ra = getRankingAsesores(reservas, escrituras);
+  const ms = ra[0]?ra[0].score:1;
+  const btnFilter = ['Todos','Mayo','Junio'].map(m=>`<button class="btn btn-sm ${mf===m?'btn-primary':'btn-outline'}" onclick="metFilter='${m}';reRenderMetricas()">${m}</button>`).join('');
+  const projBars = pa.map(([p,c])=>`<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px"><span>${escHtml(p)}</span><span class="fw7" style="color:#1e3a8a">${c}</span></div><div class="prog-bar"><div class="prog-bar-fill" style="width:${Math.round(c/mp*100)}%"></div></div></div>`).join('');
+  const rankRows = ra.map((a,i)=>`<tr>
+    <td><span style="font-size:17px">${medalOf(i)}</span></td>
+    <td class="fw6">${escHtml(a.name)}</td>
+    <td><span class="badge badge-green">${a.res}</span></td>
+    <td><span class="badge badge-gold">${a.esc}</span></td>
+    <td><span class="fw7" style="color:#0f172a;font-size:15px">${a.score}</span></td>
+    <td style="min-width:110px"><div class="prog-bar"><div class="prog-bar-fill" style="width:${Math.round(a.score/ms*100)}%;background:${i===0?'#d4a017':i===1?'#aaa':'#1e3a8a'}"></div></div></td>
+  </tr>`).join('');
+
+  return `<div class="card" style="margin-bottom:1rem"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="fw6" style="color:#0f172a;font-size:13px">📅 Filtrar:</span>${btnFilter}</div></div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1.2rem">
+    ${[{label:'Total Leads',val:tot},{label:'Contacto Activo',val:ct+sg},{label:'En Proceso',val:va+pe},{label:'Reservas',val:resF.length},{label:'Escrituras',val:escF.length}].map(k=>`<div class="stat-card" style="padding:.8rem"><div class="stat-label" style="font-size:9.5px">${k.label}</div><div class="stat-num" style="font-size:22px">${k.val}</div></div>`).join('')}
+  </div>
+  <div class="grid2" style="margin-bottom:1rem">
+    <div class="card"><div class="card-title" style="margin-bottom:1.2rem">🔽 Embudo de Conversión</div>${buildFunnel(leads)}</div>
+    <div class="card"><div class="card-title" style="margin-bottom:1rem">📈 Ventas por Mes</div>${buildBar(vpm,90)}<div style="border-top:1px solid #e2e8f0;margin-top:1rem;padding-top:1rem"><div class="card-title" style="font-size:13px;margin-bottom:.8rem">Leads por Proyecto</div>${projBars}</div></div>
+  </div>
+  <div class="card"><div class="card-header"><div class="card-title">🏆 Ranking Asesores</div><div style="font-size:11px;color:#475569">Reserva×2 + Escritura×3</div></div>
+    <div style="overflow-x:auto"><table><thead><tr><th>#</th><th>Asesor</th><th>Reservas</th><th>Escrituras</th><th>Puntaje</th><th>Rendimiento</th></tr></thead><tbody>
+    ${rankRows||'<tr><td colspan="6" style="text-align:center;color:#475569;padding:2rem">Sin datos</td></tr>'}
+    </tbody></table></div>
+  </div>`;
+}
+function reRenderMetricas() { document.querySelector('.page-content').innerHTML = renderMetricas(); }
+
+// ===================== INFORMES =====================
+let informesMes = 'Mayo';
+let informesAI = '';
+let informesLoadingAI = false;
+
+function renderInformes() {
+  const {leads, reservas, escrituras} = STATE;
+  const mes = informesMes;
+  const rM = reservas.filter(r=>r.mes===mes);
+  const eM = escrituras.filter(e=>e.mes===mes);
+  const tL=leads.length, rv=leads.filter(l=>l.status==='Reservado').length;
+  const cr=tL>0?Math.round(rv/tL*100):0, nv=leads.filter(l=>l.status==='Nuevo').length, ds=leads.filter(l=>l.status==='Descartado').length;
+  const rR={}, rE={}, rC={};
+  rM.forEach(r=>r.asesores.split(/y|,/).map(n=>n.trim()).filter(Boolean).forEach(n=>{rR[n]=(rR[n]||0)+1;if(!rC[n])rC[n]={res:0,esc:0};rC[n].res++;}));
+  eM.forEach(e=>e.asesores.split(/y|,/).map(n=>n.trim()).filter(Boolean).forEach(n=>{rE[n]=(rE[n]||0)+1;if(!rC[n])rC[n]={res:0,esc:0};rC[n].esc++;}));
+  const rrA=Object.entries(rR).sort((a,b)=>b[1]-a[1]);
+  const reA=Object.entries(rE).sort((a,b)=>b[1]-a[1]);
+  const rcA=Object.entries(rC).map(([name,v])=>({name,res:v.res,esc:v.esc,total:v.res+v.esc})).sort((a,b)=>b.total-a.total);
+  const mR=rrA[0]?rrA[0][1]:1, mE=reA[0]?reA[0][1]:1;
+  const medals=['🥇','🥈','🥉'];
+  const rankRows=rcA.map((a,i)=>{const mx=rcA[0]?.total||1;return`<tr><td><span style="font-size:17px">${medals[i]||i+1}</span></td><td class="fw6">${escHtml(a.name)}</td><td><span class="badge badge-green">${a.res}</span></td><td><span class="badge badge-gold">${a.esc}</span></td><td><span class="badge badge-forest">${a.total}</span></td><td style="min-width:110px"><div class="prog-bar"><div class="prog-bar-fill" style="width:${Math.round(a.total/mx*100)}%;background:${i===0?'#d4a017':i===1?'#aaa':'#1e3a8a'}"></div></div></td></tr>`;}).join('');
+  const rankRes=rrA.map(([n,c],i)=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e2e8f0"><span style="font-size:17px;min-width:26px">${medals[i]||''}</span><div style="flex:1"><div class="fw6" style="font-size:13px">${escHtml(n)}</div><div class="prog-bar" style="margin-top:4px"><div class="prog-bar-fill" style="width:${Math.round(c/mR*100)}%"></div></div></div><span class="badge badge-green">${c}</span></div>`).join('');
+  const rankEsc=reA.map(([n,c],i)=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e2e8f0"><span style="font-size:17px;min-width:26px">${medals[i]||''}</span><div style="flex:1"><div class="fw6" style="font-size:13px">${escHtml(n)}</div><div class="prog-bar" style="margin-top:4px"><div class="prog-bar-fill" style="width:${Math.round(c/mE*100)}%;background:#d4a017"></div></div></div><span class="badge badge-gold">${c}</span></div>`).join('');
+
+  let aiBox = '';
+  if (informesLoadingAI) aiBox=`<div class="card" style="margin-bottom:1rem;border:2px solid #d4a017"><div class="ai-header">🤖 Informe — ${mes} 2026</div><div style="color:#475569;font-size:13px">Generando informe...</div></div>`;
+  else if (informesAI) aiBox=`<div class="card" style="margin-bottom:1rem;border:2px solid #d4a017"><div class="ai-header">🤖 Informe — ${mes} 2026</div><div style="font-size:13px;line-height:1.8;white-space:pre-wrap">${escHtml(informesAI)}</div></div>`;
+
+  return `<div class="card" style="margin-bottom:1rem">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="fw6" style="color:#0f172a">📅 Mes:</span>
+        ${['Mayo','Junio'].map(m=>`<button class="btn btn-sm ${mes===m?'btn-primary':'btn-outline'}" onclick="informesMes='${m}';informesAI='';reRenderInformes()">${m} 2026</button>`).join('')}
+      </div>
+      <button class="btn btn-gold" onclick="genInformeAI()" ${informesLoadingAI?'disabled':''}>${informesLoadingAI?'⏳ Generando...':'🤖 Informe con IA'}</button>
+    </div>
+  </div>
+  ${aiBox}
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1rem">
+    <div class="stat-card"><div class="stat-label">Reservas ${mes}</div><div class="stat-num" style="color:#1e3a8a">${rM.length}</div></div>
+    <div class="stat-card gold"><div class="stat-label">Escrituras ${mes}</div><div class="stat-num">${eM.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-num">${tL}</div></div>
+    <div class="stat-card"><div class="stat-label">Conversión</div><div class="stat-num" style="color:#1e3a8a">${cr}%</div></div>
+  </div>
+  <div class="card" style="margin-bottom:1rem">
+    <div class="card-title" style="margin-bottom:1rem">🏆 Ranking — ${mes} 2026</div>
+    <div style="overflow-x:auto"><table><thead><tr><th>#</th><th>Asesor</th><th>Reservas</th><th>Escrituras</th><th>Total</th><th>Rendimiento</th></tr></thead><tbody>
+    ${rankRows||`<tr><td colspan="6" style="text-align:center;color:#475569;padding:2rem">Sin datos para ${mes}</td></tr>`}
+    </tbody></table></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><div class="card-title" style="margin-bottom:1rem">📋 Ranking Reservas</div>${rankRes||'<div style="text-align:center;color:#475569;padding:1rem">Sin datos</div>'}</div>
+    <div class="card"><div class="card-title" style="margin-bottom:1rem">📝 Ranking Escrituras</div>${rankEsc||'<div style="text-align:center;color:#475569;padding:1rem">Sin datos</div>'}</div>
+  </div>`;
+}
+
+function bindInformes() {}
+function reRenderInformes() { document.querySelector('.page-content').innerHTML = renderInformes(); }
+
+async function genInformeAI() {
+  const mes = informesMes;
+  const {leads, reservas, escrituras} = STATE;
+  const rM=reservas.filter(r=>r.mes===mes);
+  const eM=escrituras.filter(e=>e.mes===mes);
+  const tL=leads.length, rv=leads.filter(l=>l.status==='Reservado').length, nv=leads.filter(l=>l.status==='Nuevo').length, ds=leads.filter(l=>l.status==='Descartado').length;
+  const cr=tL>0?Math.round(rv/tL*100):0;
+  const rR={},rE={};
+  rM.forEach(r=>r.asesores.split(/y|,/).map(n=>n.trim()).filter(Boolean).forEach(n=>{rR[n]=(rR[n]||0)+1;}));
+  eM.forEach(e=>e.asesores.split(/y|,/).map(n=>n.trim()).filter(Boolean).forEach(n=>{rE[n]=(rE[n]||0)+1;}));
+  const rrA=Object.entries(rR).sort((a,b)=>b[1]-a[1]);
+  const reA=Object.entries(rE).sort((a,b)=>b[1]-a[1]);
+  informesLoadingAI=true; informesAI=''; reRenderInformes();
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,
+        messages:[{role:'user',content:`Informe mensual ejecutivo Energy Bless División Parcelas para Giannina Lazo.\n${mes} 2026: Reservas:${rM.length}, Escrituras:${eM.length}, Leads:${tL}(Nuevos:${nv},Reservados:${rv},Descartados:${ds}), Conversión:${cr}%.\nRanking reservas: ${rrA.map(([n,c],i)=>`${i+1}.${n}(${c})`).join(',')||'Sin datos'}\nRanking escrituras: ${reA.map(([n,c],i)=>`${i+1}.${n}(${c})`).join(',')||'Sin datos'}\n\nIncluye: 1)Resumen ejecutivo 2)Análisis ventas 3)Destacados equipo 4)Pipeline leads 5)Alertas 6)Recomendaciones. Emojis, español, tono profesional y motivador.`}]
+      })
+    });
+    const data = await r.json();
+    informesAI = (data.content||[]).map(i=>i.text||'').join('') || 'Sin respuesta';
+  } catch(e) { informesAI='❌ Error de conexión.'; }
+  informesLoadingAI=false; reRenderInformes();
+}
+
+// ===================== ANÁLISIS IA =====================
+let aiState = {q:'', resp:'', loading:false, err:''};
+const AI_PRESETS = ['Resumen ejecutivo del CRM','Rendimiento de asesores','Leads con mayor potencial','Acciones prioritarias esta semana','Cómo mejorar conversión'];
+
+function renderAI() {
+  const {q, resp, loading, err} = aiState;
+  const presets = AI_PRESETS.map(p=>`<button class="btn btn-outline btn-sm" style="font-size:11px" onclick="askAIPreset('${escHtml(p)}')">${escHtml(p)}</button>`).join('');
+  return `<div class="card">
+    <div class="card-header"><div><div class="card-title">🤖 Análisis con IA</div><div class="card-subtitle">Consultas estratégicas con contexto del CRM</div></div></div>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">${presets}</div>
+    <div style="display:flex;gap:.5rem">
+      <input class="search" style="flex:1" id="ai-q" value="${escHtml(q)}" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')askAI()"/>
+      <button class="btn btn-gold" onclick="askAI()" ${loading?'disabled':''}>${loading?'⏳':'Consultar'}</button>
+    </div>
+    ${err?`<div class="error-msg mt1">${escHtml(err)}</div>`:''}
+    ${loading?`<div class="ai-box mt1"><div class="ai-header">🤖 Analizando</div>Procesando...</div>`:''}
+    ${resp?`<div class="ai-box mt1"><div class="ai-header">🤖 Respuesta</div>${escHtml(resp)}</div>`:''}
+  </div>`;
+}
+
+function bindAI() {
+  const inp = document.getElementById('ai-q');
+  if (inp) inp.addEventListener('input', ()=>{ aiState.q=inp.value; });
+}
+
+function reRenderAI() { document.querySelector('.page-content').innerHTML = renderAI(); bindAI(); }
+
+async function askAI(q) {
+  const question = q || aiState.q;
+  if (!question.trim()) return;
+  aiState.q = question; aiState.loading=true; aiState.err=''; aiState.resp='';
+  reRenderAI();
+  const {leads, tasks, advisors, projects} = STATE;
+  const ctx = `Energy Bless División Parcelas. Leads:${leads.length}(Nuevos:${leads.filter(l=>l.status==='Nuevo').length},Reservados:${leads.filter(l=>l.status==='Reservado').length}). Tareas:${tasks.length}(Pend:${tasks.filter(t=>t.status!=='Completada').length}). Asesores:${advisors.length}. Proyectos:${projects.join(',')}`;
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Eres asesor estratégico de Energy Bless Chile. Responde en español con análisis concreto para Giannina Lazo.\n\nContexto: ${ctx}\n\nConsulta: ${question}`}]})});
+    const data = await r.json();
+    aiState.resp = (data.content||[]).map(i=>i.text||'').join('') || 'Sin respuesta';
+  } catch(e) { aiState.err='Error de conexión.'; }
+  aiState.loading=false; reRenderAI();
+}
+
+function askAIPreset(p) { aiState.q=p; askAI(p); }
+
+// ===================== PORTAL ASESOR =====================
+let advTab = 'p';
+let openTaskId = null;
+let taskReport = {};
+let taskNext = {};
+
+function renderAdvisorPortal() {
+  const {user, tasks} = STATE;
+  const my = tasks.filter(t=>t.advisorId===user.id);
+  const pend = my.filter(t=>t.status!=='Completada');
+  const done = my.filter(t=>t.status==='Completada');
+  const tab = advTab;
+
+  const taskCards = (list, isDone) => list.map(t => {
+    if (isDone) return `<div class="task-card done">
+      <div class="task-header"><span class="task-title">${escHtml(t.title)}</span><span class="badge badge-green">✓</span></div>
+      <div class="task-body">${escHtml(t.description)}</div>
+      <div style="margin-top:.8rem;padding:.9rem;background:#eff6ff;border-radius:9px;font-size:13px"><b>Reporte:</b> ${escHtml(t.report)} ${t.nextContact?`<div><b>Próximo:</b> ${escHtml(t.nextContact)}</div>`:''}</div>
+    </div>`;
+    const isOpen = openTaskId===t.id;
+    return `<div class="task-card">
+      <div class="task-header"><span class="task-title">${escHtml(t.title)}</span><span class="badge ${SCOL[t.status]||'badge-gray'}">${t.status||'Pendiente'}</span></div>
+      <div class="task-body">${escHtml(t.description)}</div>
+      <div class="flex mt1">${t.project?`<span class="tag">📍 ${escHtml(t.project)}</span>`:''} ${t.dueDate?`<span class="text-muted">📅 ${t.dueDate}</span>`:''}</div>
+      ${!isOpen?`<button class="btn btn-primary btn-sm mt2" onclick="openAdvTask('${t.id}')">📝 Reportar</button>`:`
+      <div class="task-form">
+        <div class="field"><label>Resultado *</label><textarea id="tr-${t.id}" placeholder="Describe el resultado...">${escHtml(taskReport[t.id]||'')}</textarea></div>
+        <div class="field"><label>Próximo contacto</label><input id="tn-${t.id}" value="${escHtml(taskNext[t.id]||'')}"/></div>
+        <div id="terr-${t.id}" class="err" style="display:none">Requerido</div>
+        <div class="flex mt1">
+          <button class="btn btn-primary btn-sm" onclick="submitTask('${t.id}')">✅ Enviar</button>
+          <button class="btn btn-outline btn-sm" onclick="closeAdvTask()">Cancelar</button>
+        </div>
+      </div>`}
+    </div>`;
+  }).join('');
+
+  return `<div class="advisor-portal">
+    <div class="advisor-header">
+      <div>
+        <div style="font-family:Cormorant Garamond,serif;font-size:18px;font-weight:700">🌿 Energy Bless · Portal Asesor</div>
+        <div style="font-size:12px;color:#bfdbfe;margin-top:2px">${escHtml(user.name)} — ${escHtml(user.code)}</div>
+      </div>
+      <button class="btn btn-sm" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3)" onclick="logout()">Cerrar sesión</button>
+    </div>
+    <div class="advisor-content">
+      <div class="grid2" style="margin-bottom:1rem">
+        <div class="stat-card"><div class="stat-label">Pendientes</div><div class="stat-num">${pend.length}</div></div>
+        <div class="stat-card gold"><div class="stat-label">Completadas</div><div class="stat-num">${done.length}</div></div>
+      </div>
+      <div class="tabs">
+        <div class="tab ${tab==='p'?'active':''}" onclick="switchAdvTab('p')">Pendientes (${pend.length})</div>
+        <div class="tab ${tab==='d'?'active':''}" onclick="switchAdvTab('d')">Completadas (${done.length})</div>
+      </div>
+      ${tab==='p'?(!pend.length?`<div class="card" style="text-align:center;padding:2rem;color:#475569">✅ Sin tareas pendientes</div>`:taskCards(pend,false))
+        :(!done.length?`<div class="card" style="text-align:center;padding:2rem;color:#475569">Sin completadas</div>`:taskCards(done,true))}
+    </div>
+  </div>`;
+}
+
+function bindAdvisorPortal() {}
+
+function switchAdvTab(t) { advTab=t; render(); }
+function openAdvTask(id) { openTaskId=id; render(); }
+function closeAdvTask() { openTaskId=null; render(); }
+
+async function submitTask(id) {
+  const rep = document.getElementById('tr-'+id).value.trim();
+  const nxt = document.getElementById('tn-'+id).value;
+  if (!rep) { document.getElementById('terr-'+id).style.display='block'; return; }
+  STATE.tasks = STATE.tasks.map(t=>t.id===id?{...t,status:'Completada',report:rep,nextContact:nxt,reportDate:new Date().toLocaleDateString('es-CL')}:t);
+  await sbSet('eb_tasks', STATE.tasks);
+  openTaskId=null; render();
+}
+
+// ===================== ARRANQUE =====================
+render();
+</script>
+</body>
+</html>
