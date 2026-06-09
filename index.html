@@ -12,7 +12,7 @@
   --forest2: #475569;       /* Marrón medio */
   --sage: #64748b;          /* Beige con verde suave */
   --mint: #cbd5e1;          /* Verde grisáceo */
-  --foam: #e2e8f0;          /* Crema */ae
+  --foam: #e2e8f0;          /* Crema */
   --mist: #f8fafc;          /* Crema muy claro */
   --snow: #f8fafc;          /* Blanco hueso */
   --champagne: #d4a017;     /* Champagne dorado elegante */
@@ -1330,6 +1330,29 @@ async function deleteAdvisor(id) {
 // ===================== VENTAS (RESERVAS / ESCRITURAS) =====================
 let ventasState = {showAdd:false, editId:null, fm:'Todos', fp:'', err:'', form:{mes:'',proyecto:'',parcela:'',asesores:'',lead:'',fecha:today()}};
 
+// ===== Alerta de escrituras: cuántos días lleva reservada sin escriturar =====
+function diasReservada(fecha){
+  if(!fecha) return 0;
+  const d = new Date(fecha+'T00:00:00');
+  const hoy = new Date(today()+'T00:00:00');
+  return Math.max(0, Math.round((hoy-d)/86400000));
+}
+// ¿esta parcela reservada ya tiene una escritura registrada? (mismo proyecto + parcela)
+function estaEscriturada(r){
+  const k = s=>(s||'').toString().trim().toLowerCase();
+  return STATE.escrituras.some(e=>k(e.proyecto)===k(r.proyecto) && k(e.parcela)===k(r.parcela));
+}
+// badge de color según los días sin escriturar
+function badgeReserva(r){
+  if(estaEscriturada(r)) return '<span style="background:#dbeafe;color:#1e40af;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap">✅ Escriturada</span>';
+  const d = diasReservada(r.fecha);
+  let bg,c,ico;
+  if(d>=15){bg='#fee2e2';c='#991b1b';ico='🔴 ';}
+  else if(d>=7){bg='#fef9c3';c='#854d0e';ico='🟡 ';}
+  else {bg='#dcfce7';c='#166534';ico='🟢 ';}
+  return `<span style="background:${bg};color:${c};padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap">${ico}${d} día${d===1?'':'s'} sin escriturar</span>`;
+}
+
 function renderVentas(tipo) {
   const tit = tipo==='reserva'?'Reservas':'Escrituras';
   const emo = tipo==='reserva'?'📋':'📝';
@@ -1338,6 +1361,13 @@ function renderVentas(tipo) {
   const meses = ['Todos','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   const filt = ventas.filter(v=>(fm==='Todos'||v.mes===fm)&&(!fp||v.proyecto.toLowerCase().includes(fp.toLowerCase())));
   const byP = filt.reduce((a,v)=>{if(!a[v.proyecto])a[v.proyecto]=[];a[v.proyecto].push(v);return a;},{});
+
+  // Banner de alerta: reservas con 15+ días sin escriturar (solo en página Reservas)
+  const rojas = tipo==='reserva' ? STATE.reservas.filter(r=>!estaEscriturada(r) && diasReservada(r.fecha)>=15) : [];
+  const alerta = rojas.length ? `<div class="card" style="margin-bottom:1rem;border-left:5px solid #dc2626;background:#fef2f2">
+    <div style="color:#991b1b;font-weight:700">⚠️ ${rojas.length} reserva${rojas.length===1?'':'s'} con 15+ días sin escriturar</div>
+    <div style="color:#7f1d1d;font-size:13px;margin-top:4px">Priorizar su escrituración — aparecen marcadas en 🔴 rojo en la lista.</div>
+  </div>` : '';
 
   const projOpts = STATE.projects.map(p=>`<option value="${escHtml(p)}" ${form.proyecto===p?'selected':''}>${escHtml(p)}</option>`).join('');
   const mesOpts = meses.map(m=>`<option value="${m}" ${m===fm?'selected':''}>${m}</option>`).join('');
@@ -1366,13 +1396,14 @@ function renderVentas(tipo) {
   const proyectos = Object.entries(byP).map(([proj,items])=>`
     <div class="card" style="margin-bottom:1rem">
       <div class="card-header"><div class="card-title" style="font-size:14px">🏡 ${escHtml(proj)} <span class="badge badge-green" style="margin-left:8px">${items.length}</span></div></div>
-      <table><thead><tr><th>Parcela</th><th>Asesor(es)</th><th>Lead</th><th>Mes</th><th>Fecha</th><th></th></tr></thead><tbody>
+      <table><thead><tr><th>Parcela</th><th>Asesor(es)</th><th>Lead</th><th>Mes</th><th>Fecha</th>${tipo==='reserva'?'<th>Escritura</th>':''}<th></th></tr></thead><tbody>
       ${items.map(v=>`<tr>
         <td><code style="background:#eff6ff;padding:2px 9px;border-radius:5px;font-size:12px">${escHtml(v.parcela)}</code></td>
         <td class="fw6">${escHtml(v.asesores)}</td>
         <td><span style="font-size:12px;color:#475569">${escHtml(v.lead)||'—'}</span></td>
         <td><span class="badge badge-gold">${escHtml(v.mes)}</span></td>
         <td class="text-muted text-sm">${v.fecha}</td>
+        ${tipo==='reserva'?`<td>${badgeReserva(v)}</td>`:''}
         <td><div class="flex">
           <button class="btn btn-xs" style="background:#1e3a8a;color:#fff" onclick="editVenta('${tipo}','${v.id}')">✏️</button>
           <button class="btn btn-danger btn-xs" onclick="deleteVenta('${tipo}','${v.id}')">✕</button>
@@ -1394,6 +1425,7 @@ function renderVentas(tipo) {
     </div>
   </div>
   ${addForm}
+  ${alerta}
   ${!Object.keys(byP).length?`<div class="card" style="text-align:center;color:#475569;padding:2rem">No hay ${tit.toLowerCase()} registradas</div>`:''}
   ${proyectos}`;
 }
